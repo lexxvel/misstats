@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
         <div class="header">
             <v-header></v-header>
         </div>
@@ -8,7 +8,7 @@
             <button id="modalBtn" class="uk-button uk-button-primary" href="#modal-addPerson-center" uk-toggle>Добавить</button>
 
             <spin v-if="loading"></spin>
-            <div v-else-if="!loading && !not_found">
+            <div class="uk-grid" v-else-if="!loading && !not_found">
                     <person-card v-for="person in persons"
                     :key="person.Person_id" 
                     :Person_id="person.Person_id"
@@ -146,5 +146,9 @@ export default {
 </script>
 
 <style>
-
+.personsWindow {
+    display: block;
+    min-height: 100%;
+    height: auto;
+}
 </style>

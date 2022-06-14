@@ -64,7 +64,7 @@
             </div>    
         </div>
 
-        <div uk-alert v-if="not_found">
+        <div uk-alert v-if="not_found && !loading">
             <h3>Ошибка 404. Задача не найдена!  <a @click="goToIndex"> Вернуться на главную</a></h3>
         </div>
     </div>

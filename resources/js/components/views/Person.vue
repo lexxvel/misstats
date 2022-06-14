@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div class="header">
         <v-header></v-header>
     </div>
@@ -224,5 +224,9 @@ export default {
 </script>
 
 <style>
-
+.contain {
+    display: block;
+    min-height: 100%;
+    height: auto;
+}
 </style>

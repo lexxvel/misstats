@@ -14,7 +14,7 @@
             <li>
               <div class="uk-navbar-right" v-if="isLoggedIn">
                 <ul class="uk-navbar-nav">
-                  <li class="uk-active" v-if="isLoggedIn" style="min-height:55px; max-height:55px">{{GetName}}</li>
+                  <li class="uk-active" v-if="isLoggedIn" ><a href="#" style="min-height:55px; max-height:55px">{{GetName}}</a></li>
                   <li><a @click="logout" style="color:red; min-height:55px; max-height:55px">Выход</a></li>
                 </ul>
               </div>

@@ -197,15 +197,37 @@ export default {
                             },  50)
                         }
                     })
-                    
                 } else if (this.preferCategory == 3) { //не проблемные задачи
-                    this.filteredTasks = this.tasks;
+                    this.loading = true;
+                    axios.get('/api/tasks')
+                    .then(res => {
+                        if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
+                            setTimeout(() => {
+                                this.loading = false;
+                            },  50)
+                            this.tasks = [];
+                            this.not_found = true;
+                        } else {
+                            this.filteredTasks = res.data;
+                            this.tasks = [];
+                            for (const el of this.filteredTasks) {
+                                if (el.Task_Facttime / el.Task_Plantime < 1.5 && el.Task_Facttime !== null) {
+                                    this.tasks.push(el);
+                                }
+                            }
+                            this.not_found = false;
+                            setTimeout(() => {
+                                this.loading = false;
+                            },  50)
+                        }
+                    })
+                    /*this.filteredTasks = this.tasks;
                     this.tasks = [];
                     for (const el of this.filteredTasks) {
                         if (el.Task_Facttime / el.Task_Plantime < 1.5 && el.Task_Facttime !== null) {
                             this.tasks.push(el);
                         }
-                    }
+                    }*/
                 } else {
                     //
                 }

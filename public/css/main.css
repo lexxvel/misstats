@@ -99,3 +99,11 @@ body {
     width: 1000px;
     align-self:center;
 }
+
+#app {
+    height: 100%;
+}
+
+.wrapper {
+    height: 100%;
+}

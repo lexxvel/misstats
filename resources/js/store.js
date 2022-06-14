@@ -35,6 +35,7 @@ export default new Vuex.Store({
       state.token = ''
       state.user.username = ''
       state.user.id = ''
+      state.user.role = ''
     },
     login(state, { token, username, id, role }){
       state.status = 'loggedIn'
@@ -63,7 +64,7 @@ export default new Vuex.Store({
             localStorage.setItem('role', role)
             $cookies.set('token', token) //УСТАНОВКА ТОКЕНА В КУКИ ВМЕСТО ЛОКАЛСТОР
             axios.defaults.headers.common['Authorization'] = token
-            commit('login', { token, username, id })                                                                                                                                                                                                                                                                                                                                
+            commit('login', { token, username, id, role })                                                                                                                                                                                                                                                                                                                                
             resolve(resp)
           }else{
             commit('auth_error')
