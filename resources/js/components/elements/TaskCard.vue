@@ -7,7 +7,10 @@
             </div>
             <a href="" v-if="Task_Failcause == 'Не указана' || Task_Failperson === 101 || Task_Facttime === null" @click="openTaskEdit()"><img class="sectionBtnSmall" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fcustom-icon-design%2Fflatastic-1%2F512%2Fedit-icon.png&f=1&nofb=1" alt="">
             </a>
-             </div>
+        </div>
+        <div class="task-header-sprint">
+            <p>Team Стационар 1 - Спринт 22-11</p>
+        </div>
         <div class="task-header-plan">
             <p>План: {{Task_Plantime}}</p>
         </div>
@@ -129,7 +132,16 @@ export default {
     }
 
     .task-header-number{
-        width: 33%;
+        width: 28%;
+        min-height: 25px;
+        max-height: 25px;
+        border-right: 1px solid rgb(223, 223, 223);
+        float: left;
+        padding-left: 5px;
+    }
+
+    .task-header-sprint{
+        width: 32%;
         min-height: 25px;
         max-height: 25px;
         border-right: 1px solid rgb(223, 223, 223);
@@ -138,7 +150,7 @@ export default {
     }
 
     .task-header-plan{
-        width: 33%;
+        width: 20%;
         min-height: 25px;
         max-height: 25px;
         border-left: 1px solid rgb(223, 223, 223);
@@ -147,7 +159,7 @@ export default {
     }
 
     .task-header-fact{
-        width: 34%;
+        width: 20%;
         min-height: 25px;
         max-height: 25px;
         border-left: 1px solid rgb(223, 223, 223);
@@ -188,12 +200,12 @@ export default {
     }
 
     .sectionTextWValueSmall{
-        width: 92%;
+        width: 90%;
         float: left;
     }
     
     .sectionBtnSmall{
-        width: 8%;
+        width: 10%;
         float: left;
         background-color: none;
         min-height: 25px;

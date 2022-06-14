@@ -4,7 +4,7 @@
         <v-header></v-header>
     </div>
     <div class="contain" uk-panel-scrollable>
-        <item-list></item-list>
+        <task-list></task-list>
     </div>
     <div class="footer">
         <footer-vue></footer-vue>
@@ -14,7 +14,7 @@
 
 <script>
 import Header from '../elements/Header.vue'
-import ItemList from '../elements/ItemList.vue'
+import TaskList from '../elements/TaskList.vue'
 import FooterVue from '../elements/FooterBlock.vue'
 
 //import axios from 'axios';
@@ -24,7 +24,7 @@ import FooterVue from '../elements/FooterBlock.vue'
             console.log('Component mounted.');
         },
         components: {
-            Header, ItemList, FooterVue
+            Header, TaskList, FooterVue
         }
     }
 </script>

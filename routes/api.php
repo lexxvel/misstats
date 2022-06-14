@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\v1\BasketController;
 use App\Http\Controllers\Api\v1\OrdersController;
 use App\Http\Controllers\Api\v1\CausesController;
 use App\Http\Controllers\Api\v1\PersonsController;
+use App\Http\Controllers\Api\v1\SprintsController;
 use App\Http\Kernel;
 use App\Http\Middleware\TokenValidation;
 
@@ -51,3 +52,6 @@ Route::get('persons/{id}', [PersonsController::class, 'getPersonById']);
 Route::post('persons/add', [PersonsController::class, 'addPerson']);
 Route::post('person/edit', [PersonsController::class, 'editPerson']);
 Route::get('persons/top/topFiveFailPersons', [PersonsController::class, 'getTopFiveFailPersons']);
+
+Route::post('sprints', [SprintsController::class, 'getSprints']);
+Route::post('sprints/add', [SprintsController::class, 'addSprint']);

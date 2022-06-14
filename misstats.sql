@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 14 2022 г., 09:51
+-- Время создания: Июн 14 2022 г., 21:59
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.4.27
 
@@ -76,6 +76,28 @@ INSERT INTO `persons` (`Person_id`, `Person_Name`, `Person_Secname`, `Person_Sur
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `sprints`
+--
+
+CREATE TABLE `sprints` (
+  `Sprint_id` int NOT NULL,
+  `Sprint_Name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sprint_UserId` int NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `sprints`
+--
+
+INSERT INTO `sprints` (`Sprint_id`, `Sprint_Name`, `Sprint_UserId`, `updated_at`) VALUES
+(1, 'Team Стационар - Спринт 22-12', 2, '2022-06-14 17:47:29'),
+(2, 'Team Поликлиника - Спринт 22-12', 1, NULL),
+(3, 'Team Стационар - Спринт 22-11', 2, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `tasks`
 --
 
@@ -115,7 +137,7 @@ CREATE TABLE `users` (
   `User_Name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `User_Email` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `User_Password` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `User_Role_id` int NOT NULL,
+  `User_Role_id` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   `api_token` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -125,8 +147,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `User_Name`, `User_Email`, `User_Password`, `User_Role_id`, `api_token`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin', 'm09v3q3M8V53M4*$$%352@#$fer', 10, 'wIiV205ER907VfE6NZrkkB0SNs7eMYvhDaFAII06cPMCJKMpGGXNF9Luexvm', '2022-06-13 09:07:09'),
-(2, 'Team Стационар', 'aleksandr.a.velichko@rtmis.ru', '@TeamStac2022RTMIS', 1, '', NULL);
+(1, 'admin', 'admin@admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'rGtcvKkgNJGKBl7HPzKG4r40WpNkIAFU4aYcpbQkKvQeA80yODrTPFCcBebr', '2022-06-14 17:36:52'),
+(2, 'Team Стационар', 'aleksandr.a.velichko@rtmis.ru', '@TeamStac2022RTMIS', '1', 'yASuwgWRc6oKLvIbvCS7afHpKyjOXLGRSL0rYSD9vxJ7pIhuymycMiHL6TFv', '2022-06-14 17:38:54');
 
 --
 -- Индексы сохранённых таблиц
@@ -143,6 +165,12 @@ ALTER TABLE `causes`
 --
 ALTER TABLE `persons`
   ADD PRIMARY KEY (`Person_id`);
+
+--
+-- Индексы таблицы `sprints`
+--
+ALTER TABLE `sprints`
+  ADD PRIMARY KEY (`Sprint_id`);
 
 --
 -- Индексы таблицы `tasks`
@@ -171,6 +199,12 @@ ALTER TABLE `causes`
 --
 ALTER TABLE `persons`
   MODIFY `Person_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT для таблицы `sprints`
+--
+ALTER TABLE `sprints`
+  MODIFY `Sprint_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks`

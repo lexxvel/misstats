@@ -6,24 +6,23 @@ Vue.use(VueRouter);
 
 import App from "./components/views/App.vue"
 import Login from "./components/views/Login.vue"
-import Register from "./components/views/Register.vue"
 import Task from "./components/views/Task.vue"
-import Basket from "./components/views/Basket.vue"
-import Orders from "./components/views/Orders.vue"
 import Persons from "./components/views/Persons.vue"
 import Person from "./components/views/Person.vue"
 import Graphs from "./components/views/Graphs"
+import HelloPage from "./components/views/Hello.vue"
+import Sprints from "./components/views/Sprints.vue"
 
 const routes = [
     {
         path: "/",
-        name: 'mane',
-        component: App
+        name: 'Hello',
+        component: HelloPage
     },
     {
-        path: "/register",
-        name: 'register',
-        component: Register      
+        path: "/tasks",
+        name: 'tasks',
+        component: App
     },
     {
         path: "/login",
@@ -34,16 +33,6 @@ const routes = [
         path: '/task/:id',
         name: 'task',
         component: Task
-    },
-    {
-        path: '/basket',
-        name: 'basket',
-        component: Basket
-    }, 
-    {
-        path: '/orders',
-        name: 'orders',
-        component: Orders
     },
     {
         path: '/persons',
@@ -59,6 +48,11 @@ const routes = [
         path: '/graphs',
         name: 'graphs',
         component: Graphs
+    },
+    {
+        path: '/sprints',
+        name: 'sprints',
+        component: Sprints
     }
 
 ]

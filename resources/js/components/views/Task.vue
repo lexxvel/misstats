@@ -58,14 +58,14 @@
                         </div>
                     </fieldset>
                 </form>
-                <button class="uk-button uk-button-danger" @click="goToIndex">Назад</button>
+                <button class="uk-button uk-button-danger" @click="goToTasks">Назад</button>
                 <button class="uk-button uk-button-primary" @click="addTaskInfo">Сохранить</button>
                 <button class="uk-button uk-button-primary" @click="addTaskInfoAndExit">Сохранить и выйти</button>
             </div>    
         </div>
 
         <div uk-alert v-if="not_found && !loading">
-            <h3>Ошибка 404. Задача не найдена!  <a @click="goToIndex"> Вернуться на главную</a></h3>
+            <h3>Ошибка 404. Задача не найдена!  <a @click="goToTasks"> Вернуться к задачам</a></h3>
         </div>
     </div>
     <div class="footer">
@@ -145,8 +145,8 @@ export default {
                     this.not_found = true;
                 })
             },
-            goToIndex: function(){
-                this.$router.push('/').catch(()=>{})
+            goToTasks: function(){
+                this.$router.push('/tasks').catch(()=>{})
             },
             loadCauses(){
                 axios.get('/api/causes')
@@ -231,7 +231,7 @@ export default {
             },
             addTaskInfoAndExit() {
                 this.addTaskInfo();
-                this.goToIndex();
+                this.goToTasks();
             }
     }
 }

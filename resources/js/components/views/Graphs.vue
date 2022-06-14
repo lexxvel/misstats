@@ -40,13 +40,12 @@
 <script>
 import Header from '../elements/Header.vue'
 import Spin from '../elements/Spin.vue';
-import ItemCard from '../elements/ItemCard.vue';
 import PieChart from '../elements/Pie.vue'
 import axios from 'axios';
 
 export default {
         components: {
-            Header, Spin, ItemCard, PieChart
+            Header, Spin, PieChart
         },
         data: () => ({
             loading: false,
