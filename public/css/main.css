@@ -1,0 +1,101 @@
+html {
+    font-size: 20px;
+    /*font-family: 'Roboto Condensed', sans-serif; */
+    background-color: #f3f3f3;
+    height: 100%;
+  }
+  
+body {
+    width: 1000px;
+    height: 100%;
+    overflow: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+    /*padding: 0 20px 20px 20px;*/
+  }
+
+.header {
+    float: left;
+    width: 1000px;
+    height: 55px;
+    align-self:center;
+}
+
+.logo {
+    float: left;
+    width: 300px;
+    height: 55px;
+    display: block;
+    /* Не забудьте о свойстве max-width */
+    max-width: 100%;
+    display: block;
+    background-color: #ffffff;
+    /*padding: 0 100px 0 20px; */
+
+}
+
+
+.headerUL {
+    list-style: none;
+    margin: 0;
+
+    text-align: right;
+}
+.headerLI {
+    display: inline-block;
+    margin: 0 5px;
+    transition: all 0.3s;
+
+}
+.headerLINK {
+    display: block;
+    color: #285064;
+    transition: all 0.3s;
+}
+.headerLINK:hover {
+    color: #12242d;
+}
+/*nav span {
+    display: block;
+}*/
+
+@media all and (min-width: 690px) {
+    .headerLI {
+        width: 130px;
+        height: 55px;
+        padding: 0 5px 0 5px;
+        margin: 0;
+        transform: skewX(-10deg);
+        align-content: right;
+
+    }
+    .headerLINK {
+        width: auto;
+        height: auto;
+        padding: 10px 5px 15px 5px;
+        color: #fff;
+        text-align: centesr;
+        background-color: #0061cb;
+        text-decoration: none;
+    }
+    .headerLINK:hover {
+        color: #fff;
+        background-color: #004a9c;
+    }
+    /*nav span {
+        transform: skewX(10deg);
+    }*/
+}
+
+.contain {
+    float:left;
+    width: 100%;
+    align-items: flex-start;
+    height: auto;
+}
+
+.footer {
+    float: left;
+    width: 1000px;
+    align-self:center;
+}
