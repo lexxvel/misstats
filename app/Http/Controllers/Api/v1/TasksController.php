@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Api\v1;
 use App\Models\tasks;
 use App\Models\causes;
 use App\Models\persons;
+use App\Models\sprints;
+use App\Models\sprintscauseslink;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
     public function getAllTasks() {
-        
         return tasks::join('causes', 'tasks.Task_Failcause', '=', 'causes.Cause_id')
         ->join('persons', 'tasks.Task_Failperson', '=', 'persons.Person_id')
-        ->select('tasks.*', 'causes.Cause_Name', 'persons.Person_Fullname')->get();
+        ->join('sprints', 'sprints.Sprint_id', '=', 'tasks.Task_SprintId')
+        ->select('tasks.*', 'causes.Cause_Name', 'persons.Person_Fullname', 'sprints.Sprint_id', 'sprints.Sprint_Name')->get();
     }
 
 
@@ -32,6 +34,11 @@ class TasksController extends Controller
             //проблемные задачи
         } else if ($category === 3) {
             //Не проблемные задачи
+        } else {
+            return [
+                "status" => false,
+                "message" => 'Запрос построен неправильно'
+            ];
         }
 
     }
@@ -40,7 +47,8 @@ class TasksController extends Controller
         $task = tasks::where('Task_id', $id)
             ->join('causes', 'tasks.Task_Failcause', '=', 'causes.Cause_id')
             ->join('persons', 'tasks.Task_Failperson', '=', 'persons.Person_id')
-            ->select('tasks.*', 'causes.Cause_Name', 'persons.Person_Fullname')
+            ->join('sprints', 'sprints.Sprint_id', '=', 'tasks.Task_SprintId')
+            ->select('tasks.*', 'causes.Cause_Name', 'persons.Person_Fullname', 'sprints.Sprint_Name')
             ->first();
         
         if ($task === null || !$task || $task === "") {
@@ -59,6 +67,7 @@ class TasksController extends Controller
         $Task_Facttime = floatval($request->input("Task_Facttime")); //получение фактических трудозатрат
         $Task_Failcause = $request->input("Task_Failcause");
         $Task_Failperson = $request->input("Task_Failperson");
+        $Sprint_Name = $request->input("Task_SprintName");
         $isExist = tasks::where("Task_Number", $Task_Number)->count();
 
         if ($isExist >= 1) {
@@ -128,10 +137,11 @@ class TasksController extends Controller
     public function addTaskV2 (Request $request) {
         $Task_Number = $request->input('Task_Number'); //получение номера задачи
         $Task_Plantime = floatval($request->input("Task_Plantime")); //получение запланированного времени
-        if ($Task_Number === "" || $Task_Plantime === "") {
+        $Sprint_Name = $request->input("Task_SprintName");
+        if ($Task_Number === "" || $Task_Plantime === "" || $Sprint_Name === "") {
             return [
                 "status" => false,
-                "message" => 'Номер задачи или плановое время не указано!'
+                "message" => 'Номер задачи, плановое время или спринт не указаны!'
             ];
         } else {
             $isExist = tasks::where("Task_Number", $Task_Number)->count();
@@ -141,9 +151,11 @@ class TasksController extends Controller
                     "message" => 'Задача уже добавлена ранее'
                 ];
             } else {
+                $sprintId = sprints::where('Sprint_Name', 'like', $Sprint_Name)->first()->Sprint_id;
                 tasks::insert([
                     'Task_Number' => $Task_Number,
                     'Task_Plantime' => $Task_Plantime,
+                    'Task_SprintId' => $sprintId,
                     'Task_Failcause' => 101,
                     'Task_Failperson' => 101
                 ]);
@@ -169,6 +181,20 @@ class TasksController extends Controller
                     $person = persons::where('Person_id', $personId)->first();
                     $person->Person_Failcount += 1;
                     $person->save();
+
+                    $sprintId = tasks::where('Task_id', $NewTaskId)->first()->Task_SprintId;
+                    $linkIsExist = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->get()->count();
+                    if ($linkIsExist < 1) {
+                        sprintscauseslink::insert([
+                            'Sprint_id' => $sprintId,
+                            'Cause_id' => $causeId,
+                            'Cause_Failcount' => 1
+                        ]);
+                    } else {
+                        $linkQuery = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->first();
+                        $linkQuery->Cause_Failcount += 1;
+                        $linkQuery->save();
+                    }
                 } else if ($Task_Facttime === NULL && $Task_Failcause !== NULL && $Task_Failperson !== NULL) {
                     $causeId = causes::where('Cause_Name', 'like', $Task_Failcause)->first()->Cause_id;
                     $personId = persons::where('Person_Fullname', 'like', $Task_Failperson)->first()->Person_id;
@@ -184,6 +210,20 @@ class TasksController extends Controller
                     $person = persons::where('Person_id', $personId)->first();
                     $person->Person_Failcount += 1;
                     $person->save();
+
+                    $sprintId = tasks::where('Task_id', $NewTaskId)->first()->Task_SprintId;
+                    $linkIsExist = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->get()->count();
+                    if ($linkIsExist < 1) {
+                        sprintscauseslink::insert([
+                            'Sprint_id' => $sprintId,
+                            'Cause_id' => $causeId,
+                            'Cause_Failcount' => 1
+                        ]);
+                    } else {
+                        $linkQuery = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->first();
+                        $linkQuery->Cause_Failcount += 1;
+                        $linkQuery->save();
+                    }
                 } else if ($Task_Facttime !== NULL && $Task_Failcause === NULL && $Task_Failperson !== NULL) {
                     $personId = persons::where('Person_Fullname', 'like', $Task_Failperson)->first()->Person_id;
 
@@ -206,6 +246,20 @@ class TasksController extends Controller
                     $cause = causes::where('Cause_id', $causeId)->first();
                     $cause->Cause_Failcount += 1;
                     $cause->save();
+
+                    $sprintId = tasks::where('Task_id', $NewTaskId)->first()->Task_SprintId;
+                    $linkIsExist = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->get()->count();
+                    if ($linkIsExist < 1) {
+                        sprintscauseslink::insert([
+                            'Sprint_id' => $sprintId,
+                            'Cause_id' => $causeId,
+                            'Cause_Failcount' => 1
+                        ]);
+                    } else {
+                        $linkQuery = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->first();
+                        $linkQuery->Cause_Failcount += 1;
+                        $linkQuery->save();
+                    }
                 } else if ($Task_Facttime === NULL && $Task_Failcause === NULL && $Task_Failperson !== NULL) {
                     $personId = persons::where('Person_Fullname', 'like', $Task_Failperson)->first()->Person_id;
                     
@@ -230,6 +284,20 @@ class TasksController extends Controller
                     $cause = causes::where('Cause_id', $causeId)->first();
                     $cause->Cause_Failcount += 1;
                     $cause->save();
+
+                    $sprintId = tasks::where('Task_id', $NewTaskId)->first()->Task_SprintId;
+                    $linkIsExist = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->get()->count();
+                    if ($linkIsExist < 1) {
+                        sprintscauseslink::insert([
+                            'Sprint_id' => $sprintId,
+                            'Cause_id' => $causeId,
+                            'Cause_Failcount' => 1
+                        ]);
+                    } else {
+                        $linkQuery = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->first();
+                        $linkQuery->Cause_Failcount += 1;
+                        $linkQuery->save();
+                    }
                 } else if ($Task_Facttime === NULL && $Task_Failcause === NULL && $Task_Failperson === NULL) {
                     //
                 } else {
@@ -279,6 +347,21 @@ class TasksController extends Controller
                     $cause = causes::where('Cause_id', $causeId)->first();
                     $cause->Cause_Failcount += 1;
                     $cause->save();
+
+                    $sprintId = tasks::where('Task_id', $Task_id)->first()->Task_SprintId;
+                    $linkIsExist = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->get()->count();
+                    if ($linkIsExist < 1) {
+                        sprintscauseslink::insert([
+                            'Sprint_id' => $sprintId,
+                            'Cause_id' => $causeId,
+                            'Cause_Failcount' => 1
+                        ]);
+                    } else {
+                        $linkQuery = sprintscauseslink::where('Sprint_id', $sprintId)->where('Cause_id', $causeId)->first();
+                        $linkQuery->Cause_Failcount += 1;
+                        $linkQuery->save();
+                    }
+
                     return [
                         "status" => true,
                         "message" => "Причина задержки установлена!"

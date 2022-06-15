@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июн 14 2022 г., 21:59
--- Версия сервера: 8.0.24
--- Версия PHP: 7.4.27
+-- Хост: localhost
+-- Время создания: Июн 15 2022 г., 20:01
+-- Версия сервера: 8.0.26
+-- Версия PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `causes` (
   `Cause_id` int NOT NULL,
-  `Cause_Name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Cause_Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Cause_Failcount` int DEFAULT NULL,
   `Cause_Type` int DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -41,8 +41,8 @@ CREATE TABLE `causes` (
 
 INSERT INTO `causes` (`Cause_id`, `Cause_Name`, `Cause_Failcount`, `Cause_Type`, `updated_at`) VALUES
 (1, 'Не все учтено при оценке', 1, NULL, '2022-06-10 20:12:28'),
-(2, 'Затянута разработка', 1, NULL, '2022-06-10 20:48:03'),
-(3, 'Много ошибок', 2, NULL, '2022-06-11 17:51:49'),
+(2, 'Затянута разработка', 6, NULL, '2022-06-15 19:46:48'),
+(3, 'Много ошибок', 3, NULL, '2022-06-15 19:32:13'),
 (101, 'Не указана', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -53,12 +53,12 @@ INSERT INTO `causes` (`Cause_id`, `Cause_Name`, `Cause_Failcount`, `Cause_Type`,
 
 CREATE TABLE `persons` (
   `Person_id` int NOT NULL,
-  `Person_Name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Person_Secname` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Person_Surname` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Person_Fullname` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Person_Email` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Person_TableId` varchar(7) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Person_Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Person_Secname` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Person_Surname` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Person_Fullname` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Person_Email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Person_TableId` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Person_Failcount` int DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -68,7 +68,7 @@ CREATE TABLE `persons` (
 --
 
 INSERT INTO `persons` (`Person_id`, `Person_Name`, `Person_Secname`, `Person_Surname`, `Person_Fullname`, `Person_Email`, `Person_TableId`, `Person_Failcount`, `updated_at`) VALUES
-(1, 'Тестан', 'Тестовиич', 'Тестенко', 'Тестенко Тестан Тестовиич', 'test@rtmi.ru', '00011', 1, '2022-06-11 19:46:51'),
+(1, 'Тестан', 'Тестовиич', 'Тестенко', 'Тестенко Тестан Тестовиич', 'test@rtmi.ru', '00011', 3, '2022-06-15 19:46:48'),
 (2, 'Александр', 'Андреевич', 'Величко', 'Величко Александр Андреевич', 'aleksandr.a.velichko@rtmis.ru', NULL, 1, NULL),
 (101, 'Не указан', 'Не указан', 'Не указан', 'Не указан', 'Не указан', NULL, NULL, NULL),
 (102, 'Иван', 'Иванович', 'Иванов', 'Иванов Иван Иванович', 'test@test.rt', NULL, 2, '2022-06-11 17:51:52');
@@ -81,7 +81,7 @@ INSERT INTO `persons` (`Person_id`, `Person_Name`, `Person_Secname`, `Person_Sur
 
 CREATE TABLE `sprints` (
   `Sprint_id` int NOT NULL,
-  `Sprint_Name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sprint_Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Sprint_UserId` int NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -98,16 +98,42 @@ INSERT INTO `sprints` (`Sprint_id`, `Sprint_Name`, `Sprint_UserId`, `updated_at`
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `sprintscauseslink`
+--
+
+CREATE TABLE `sprintscauseslink` (
+  `Sprintscauseslink_id` int NOT NULL,
+  `Sprint_id` int DEFAULT NULL,
+  `User_id` int DEFAULT NULL,
+  `Cause_id` int NOT NULL,
+  `Cause_Failcount` int NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `sprintscauseslink`
+--
+
+INSERT INTO `sprintscauseslink` (`Sprintscauseslink_id`, `Sprint_id`, `User_id`, `Cause_id`, `Cause_Failcount`, `updated_at`) VALUES
+(1, 1, 2, 1, 1, NULL),
+(2, 1, 2, 2, 3, '2022-06-15 19:30:24'),
+(3, 1, NULL, 3, 1, NULL),
+(4, 2, NULL, 2, 3, '2022-06-15 19:46:48');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `tasks`
 --
 
 CREATE TABLE `tasks` (
   `Task_id` int NOT NULL,
-  `Task_Number` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Task_Number` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Task_Plantime` float NOT NULL,
   `Task_Facttime` float DEFAULT NULL,
   `Task_Failcause` int DEFAULT NULL,
   `Task_Failperson` int DEFAULT NULL,
+  `Task_SprintId` int NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -115,16 +141,18 @@ CREATE TABLE `tasks` (
 -- Дамп данных таблицы `tasks`
 --
 
-INSERT INTO `tasks` (`Task_id`, `Task_Number`, `Task_Plantime`, `Task_Facttime`, `Task_Failcause`, `Task_Failperson`, `updated_at`) VALUES
-(1, '87900', 0.2, 1.7, 2, 102, '2022-06-10 20:48:03'),
-(11, '124', 0.1, 0.2, 3, 2, '2022-06-10 20:06:22'),
-(16, '22', 322, 2, 1, 101, '2022-06-10 20:12:28'),
-(17, '1', 1, 2.5, 3, 102, '2022-06-10 20:15:24'),
-(28, '121212', 0.2, NULL, 101, 1, '2022-06-11 19:46:51'),
-(29, '12123', 1, 4, 101, 101, '2022-06-12 15:00:45'),
-(30, '12343', 1, 3, 101, 101, '2022-06-12 15:02:49'),
-(31, '23232', 1, 3, 101, 101, '2022-06-12 15:18:13'),
-(32, '777', 7, 77, 101, 101, '2022-06-12 15:48:36');
+INSERT INTO `tasks` (`Task_id`, `Task_Number`, `Task_Plantime`, `Task_Facttime`, `Task_Failcause`, `Task_Failperson`, `Task_SprintId`, `updated_at`) VALUES
+(1, '87900', 0.2, 1.7, 2, 102, 1, '2022-06-10 20:48:03'),
+(11, '124', 0.1, 0.2, 3, 2, 2, '2022-06-10 20:06:22'),
+(16, '22', 322, 2, 1, 101, 3, '2022-06-10 20:12:28'),
+(17, '1', 1, 2.5, 3, 102, 1, '2022-06-10 20:15:24'),
+(28, '121212', 0.2, NULL, 101, 1, 2, '2022-06-11 19:46:51'),
+(33, '7676', 1, NULL, 2, 101, 1, '2022-06-15 19:30:24'),
+(34, '9999', 1, NULL, 3, 101, 1, '2022-06-15 19:32:13'),
+(35, '8989', 1, NULL, 101, 101, 2, NULL),
+(36, '5444', 1, NULL, 2, 101, 2, '2022-06-15 19:38:21'),
+(37, '423', 1, 2, 2, 1, 2, '2022-06-15 19:39:08'),
+(38, '6565654', 1, NULL, 2, 1, 2, '2022-06-15 19:46:48');
 
 -- --------------------------------------------------------
 
@@ -134,11 +162,11 @@ INSERT INTO `tasks` (`Task_id`, `Task_Number`, `Task_Plantime`, `Task_Facttime`,
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `User_Name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `User_Email` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `User_Password` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `User_Role_id` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `api_token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `User_Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `User_Email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `User_Password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `User_Role_id` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `api_token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -147,8 +175,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `User_Name`, `User_Email`, `User_Password`, `User_Role_id`, `api_token`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'rGtcvKkgNJGKBl7HPzKG4r40WpNkIAFU4aYcpbQkKvQeA80yODrTPFCcBebr', '2022-06-14 17:36:52'),
-(2, 'Team Стационар', 'aleksandr.a.velichko@rtmis.ru', '@TeamStac2022RTMIS', '1', 'yASuwgWRc6oKLvIbvCS7afHpKyjOXLGRSL0rYSD9vxJ7pIhuymycMiHL6TFv', '2022-06-14 17:38:54');
+(1, 'admin', 'admin@admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'cYSk1q7LmdxGGDgTVXy54wWwyhAAja1q7tQkNWeWghEbSTVx5ozNcJE4q41X', '2022-06-15 19:53:29'),
+(2, 'Team Стационар', 'aleksandr.a.velichko@rtmis.ru', '@TeamStac2022RTMIS', '1', 'IqTQENDKCpFzdkJPy6zJhJCZtt5GYAxYVidhagcJaySlZ2b3tLWtkhvqKMMi', '2022-06-15 19:48:12');
 
 --
 -- Индексы сохранённых таблиц
@@ -171,6 +199,12 @@ ALTER TABLE `persons`
 --
 ALTER TABLE `sprints`
   ADD PRIMARY KEY (`Sprint_id`);
+
+--
+-- Индексы таблицы `sprintscauseslink`
+--
+ALTER TABLE `sprintscauseslink`
+  ADD PRIMARY KEY (`Sprintscauseslink_id`);
 
 --
 -- Индексы таблицы `tasks`
@@ -207,10 +241,16 @@ ALTER TABLE `sprints`
   MODIFY `Sprint_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT для таблицы `sprintscauseslink`
+--
+ALTER TABLE `sprintscauseslink`
+  MODIFY `Sprintscauseslink_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `Task_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `Task_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

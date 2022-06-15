@@ -21948,6 +21948,10 @@ __webpack_require__.r(__webpack_exports__);
     Task_FailpersonFullName: {
       type: String,
       "default": ""
+    },
+    Sprint_Name: {
+      type: String,
+      "default": ""
     }
   },
   data: function data() {
@@ -22006,6 +22010,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Spin_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Spin.vue */ "./resources/js/components/elements/Spin.vue");
 /* harmony import */ var _TaskCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TaskCard.vue */ "./resources/js/components/elements/TaskCard.vue");
 /* harmony import */ var _Options_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Options.vue */ "./resources/js/components/elements/Options.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -22108,11 +22116,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
  //import { resolveSoa } from 'dns';
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({
   components: {
     Spin: _Spin_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     TaskCard: _TaskCard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -22129,10 +22150,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Task_Plantime: "",
         Task_Facttime: "",
         Task_Failcause: "",
-        Task_Failperson: ""
+        Task_Failperson: "",
+        Task_SprintName: ""
       },
       CauseOptions: [],
       Persons: [],
+      Sprints: [],
       filteredTasks: [],
       tasksLenght: 0
     };
@@ -22165,7 +22188,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 this.loading = true;
                 _context.next = 3;
-                return axios.get('/api/tasks').then(function (res) {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/tasks').then(function (res) {
                   if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
                     setTimeout(function () {
                       _this.loading = false;
@@ -22202,7 +22225,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.loadTasks();
       } else if (this.preferCategory == 1) {
         this.loading = true;
-        axios.post('/api/tasks/byCat', {
+        axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/tasks/byCat', {
           category: this.preferCategory
         }).then(function (res) {
           if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
@@ -22220,7 +22243,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (this.preferCategory == 2) {
           //проблемные задачи
           this.loading = true;
-          axios.get('/api/tasks').then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/tasks').then(function (res) {
             if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
               setTimeout(function () {
                 _this2.loading = false;
@@ -22257,7 +22280,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         } else if (this.preferCategory == 3) {
           //не проблемные задачи
           this.loading = true;
-          axios.get('/api/tasks').then(function (res) {
+          axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/tasks').then(function (res) {
             if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
               setTimeout(function () {
                 _this2.loading = false;
@@ -22308,7 +22331,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loadCauses: function loadCauses() {
       var _this3 = this;
 
-      axios.get('/api/causes').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/causes').then(function (res) {
         if (res.data == "" || res.data == null || !res.data) {
           setTimeout(function () {
             _this3.loading = false;
@@ -22323,7 +22346,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loadPersons: function loadPersons() {
       var _this4 = this;
 
-      axios.get('/api/persons').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/persons').then(function (res) {
         if (res.data == "" || res.data == null || !res.data) {
           UIkit.notification({
             message: 'Не удалось загрузить сотрудников!',
@@ -22335,20 +22358,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       });
     },
+    loadSprints: function loadSprints() {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/sprints', {
+        'User_id': this.User_id
+      }).then(function (res) {
+        if (res.data.status == false) {
+          _this5.Sprints = [];
+          UIkit.notification({
+            message: res.data.message,
+            status: 'danger'
+          });
+        } else if (res.data) {
+          _this5.Sprints = res.data;
+        } else {
+          UIkit.notification({
+            message: "При загрузке спринтов произошла ошибка!",
+            status: 'danger'
+          });
+        }
+      });
+    },
     clearAddTaskForm: function clearAddTaskForm() {
       this.form.Task_Number = "";
       this.form.Task_Plantime = "";
       this.form.Task_Facttime = "";
       this.form.Task_Failcause = "";
       this.form.Task_Failperson = "";
+      this.form.Task_SprintName = "";
     },
     addTask: function addTask() {
-      axios.post('/api/tasks/add', {
+      axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/tasks/add', {
         Task_Number: this.form.Task_Number,
         Task_Plantime: this.form.Task_Plantime,
         Task_Facttime: this.form.Task_Facttime,
         Task_Failcause: this.form.Task_Failcause,
-        Task_Failperson: this.form.Task_Failperson
+        Task_Failperson: this.form.Task_Failperson,
+        Task_SprintName: this.form.Task_SprintName
       }).then(function (res) {
         if (res.data.status == true) {
           UIkit.notification({
@@ -22381,8 +22428,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.loadTasks();
     this.loadCauses();
     this.loadPersons();
+    this.loadSprints();
   }
-});
+}, "computed", {
+  User_id: function User_id() {
+    return this.$store.getters.GetID;
+  }
+}));
 
 /***/ }),
 
@@ -22445,8 +22497,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elements_Header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../elements/Header.vue */ "./resources/js/components/elements/Header.vue");
 /* harmony import */ var _elements_Spin_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../elements/Spin.vue */ "./resources/js/components/elements/Spin.vue");
 /* harmony import */ var _elements_Pie_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../elements/Pie.vue */ "./resources/js/components/elements/Pie.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _elements_Options_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elements/Options.vue */ "./resources/js/components/elements/Options.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -22492,6 +22545,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -22500,35 +22572,51 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   components: {
     Header: _elements_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Spin: _elements_Spin_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PieChart: _elements_Pie_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PieChart: _elements_Pie_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Options: _elements_Options_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
       loading: false,
       not_found: false,
+      dataBySprintLoaded: false,
       persons: [],
       causes: [],
+      sprints: [],
       arrPersonsFioTopFive: [],
       arrPersonsFailsTopFive: [],
       arrCausesLabelsTopFive: [],
-      arrCausesCountTopFive: []
+      arrCausesCountTopFive: [],
+      form: {
+        Sprint_Name: ""
+      },
+      arrCausesBySprints: [],
+      arrCausesBySprintsLabels: [],
+      arrCausesBySprintsCounts: []
     };
   },
   mounted: function mounted() {
     this.getTopFiveFailPersons();
   },
+  computed: {
+    User_id: function User_id() {
+      return this.$store.getters.GetID;
+    }
+  },
   created: function created() {
-    /*console.log("logged in: " + this.$store.getters.isLoggedIn);
-    console.log("role: " + $cookies.get('role_id'));
-    if (this.$store.getters.isLoggedIn === false || this.$store.getters.GetRole !== "2") {
-    this.$router.push('/');
-    };*/
+    console.log("logged in: " + this.$store.getters.isLoggedIn);
+
+    if (this.$store.getters.isLoggedIn === false || this.$store.getters.GetRole === '1') {
+      this.$router.push('/');
+    }
+
+    ;
   },
   methods: {
     getTopFiveFailPersons: function getTopFiveFailPersons() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/persons/top/topFiveFailPersons').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/persons/top/topFiveFailPersons').then(function (res) {
         _this.persons = res.data;
 
         if (_this.arrPersonsFioTopFive == 0 && _this.arrPersonsFailsTopFive == 0) {
@@ -22560,7 +22648,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getTopFiveFailCauses: function getTopFiveFailCauses() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/causes/top/topFiveFailCauses').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/causes/top/topFiveFailCauses').then(function (res) {
         _this2.causes = res.data;
 
         if (_this2.arrCausesLabelsTopFive == 0 && _this2.arrCausesCountTopFive == 0) {
@@ -22587,6 +22675,65 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }, 100);
       })["catch"](function (err) {
         _this2.not_found = true;
+      });
+    },
+    loadSprints: function loadSprints() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/sprints', {
+        User_id: this.User_id
+      }).then(function (res) {
+        if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
+          setTimeout(function () {
+            _this3.loading = false;
+          }, 50);
+          _this3.sprints = [];
+          _this3.not_found = true;
+        } else {
+          _this3.sprints = res.data;
+          _this3.not_found = false;
+          setTimeout(function () {
+            _this3.loading = false;
+          }, 50);
+        }
+      });
+    },
+    findStatsBySprint: function findStatsBySprint() {
+      var _this4 = this;
+
+      this.dataBySprintLoaded = false;
+      this.arrCausesBySprints = [];
+      this.arrCausesBySprintsLabels = [];
+      this.arrCausesBySprintsCounts = [];
+      axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/sprintCausesLink/bySprint', {
+        Sprint_Name: this.form.Sprint_Name
+      }).then(function (res) {
+        if (res.data.status == false) {
+          _this4.dataBySprintLoaded = false;
+        } else {
+          _this4.arrCausesBySprints = res.data;
+
+          if (_this4.arrCausesBySprintsLabels == 0 && _this4.arrCausesBySprintsCounts == 0) {
+            var _iterator3 = _createForOfIteratorHelper(_this4.arrCausesBySprints),
+                _step3;
+
+            try {
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                var el = _step3.value;
+
+                _this4.arrCausesBySprintsLabels.push(el.Cause_Name);
+
+                _this4.arrCausesBySprintsCounts.push(el.Cause_Failcount);
+              }
+            } catch (err) {
+              _iterator3.e(err);
+            } finally {
+              _iterator3.f();
+            }
+          }
+
+          _this4.dataBySprintLoaded = true;
+        }
       });
     }
   }
@@ -23382,6 +23529,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elements_Options_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elements/Options.vue */ "./resources/js/components/elements/Options.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -42513,7 +42665,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 120px;\r\n    max-height: 120px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 12pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card-person{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 120px;\r\n    max-height: 120px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 12pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42561,7 +42713,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 12pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 10pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63728,7 +63880,6 @@ var render = function () {
               _c("ul", { staticClass: "uk-navbar-nav" }, [
                 _c(
                   "li",
-                  { staticClass: "uk-active" },
                   [
                     _vm.isLoggedIn
                       ? _c(
@@ -63923,7 +64074,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "uk-card uk-width-1-3@m" }, [
+  return _c("div", { staticClass: "uk-card-person uk-width-1-3@m" }, [
     _c("div", { staticClass: "btnEditItem" }, [
       _c(
         "a",
@@ -64084,16 +64235,13 @@ var render = function () {
     _c("div", { staticClass: "uk-card-header" }, [
       _c(
         "p",
-        {
-          staticClass:
-            "CardItemName uk-text-center@s uk-text-emphasis uk-text-bolder",
-        },
+        { staticClass: "CardItemName uk-text-center@s uk-text-emphasis" },
         [_vm._v(_vm._s(_vm.Sprint_Name))]
       ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "uk-card-body" }, [
-      _c("p", { staticClass: "uk-text-center@s" }, [
+      _c("p", { staticClass: "uk-text-center@s uk-text-muted" }, [
         _vm._v(_vm._s(_vm.User_Name)),
       ]),
     ]),
@@ -64157,7 +64305,9 @@ var render = function () {
           : _vm._e(),
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "task-header-sprint" }, [
+        _c("p", [_vm._v(_vm._s(_vm.Sprint_Name))]),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "task-header-plan" }, [
         _c("p", [_vm._v("План: " + _vm._s(_vm.Task_Plantime))]),
@@ -64209,16 +64359,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "task-header-sprint" }, [
-      _c("p", [_vm._v("Team Стационар 1 - Спринт 22-11")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64358,6 +64499,7 @@ var render = function () {
                     Task_Failcause: task.Cause_Name,
                     Task_Failperson: task.Task_Failperson,
                     Task_FailpersonFullName: task.Person_Fullname,
+                    Sprint_Name: task.Sprint_Name,
                   },
                 })
               }),
@@ -64424,6 +64566,64 @@ var render = function () {
                           },
                         },
                       }),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "uk-margin" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "uk-form-label",
+                          attrs: { for: "form-horizontal-select" },
+                        },
+                        [_vm._v("Спринт")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "uk-form-controls" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.Task_SprintName,
+                                expression: "form.Task_SprintName",
+                              },
+                            ],
+                            staticClass: "uk-select",
+                            attrs: {
+                              required: "",
+                              id: "form-horizontal-select",
+                            },
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "Task_SprintName",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                            },
+                          },
+                          _vm._l(_vm.Sprints, function (sprint) {
+                            return _c("options", {
+                              key: sprint.Sprint_id,
+                              attrs: { Option: sprint.Sprint_Name },
+                            })
+                          }),
+                          1
+                        ),
+                      ]),
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "uk-margin" }, [
@@ -64611,7 +64811,7 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Cancel")]
+                      [_vm._v("Отмена")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -64620,7 +64820,7 @@ var render = function () {
                         staticClass: "uk-button uk-button-primary",
                         attrs: { type: "submit" },
                       },
-                      [_vm._v("Save")]
+                      [_vm._v("Сохранить")]
                     ),
                   ]),
                 ]
@@ -64745,6 +64945,14 @@ var render = function () {
                       [_vm._v("Топ 5 причин задержки")]
                     ),
                   ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      { attrs: { href: "" }, on: { click: _vm.loadSprints } },
+                      [_vm._v("Топ 5 причин задержки По спринтам")]
+                    ),
+                  ]),
                 ]),
                 _vm._v(" "),
                 _c("ul", { staticClass: "uk-switcher uk-margin" }, [
@@ -64775,6 +64983,79 @@ var render = function () {
                             chartLabelsData: _vm.arrCausesLabelsTopFive,
                           },
                         }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "div",
+                      { staticClass: "BySprints" },
+                      [
+                        _c("span", { staticClass: "uk-label labelMax" }, [
+                          _vm._v("Выберите спринт"),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.Sprint_Name,
+                                expression: "form.Sprint_Name",
+                              },
+                            ],
+                            staticClass: "uk-select",
+                            attrs: { id: "form-horizontal-select" },
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "Sprint_Name",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                            },
+                          },
+                          _vm._l(_vm.sprints, function (sprint) {
+                            return _c("options", {
+                              key: sprint.Sprint_id,
+                              attrs: { Option: sprint.Sprint_Name },
+                            })
+                          }),
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "uk-button uk-button-primary",
+                            on: { click: _vm.findStatsBySprint },
+                          },
+                          [_vm._v("Найти")]
+                        ),
+                        _vm._v(" "),
+                        _vm.dataBySprintLoaded
+                          ? _c("PieChart", {
+                              attrs: {
+                                chartCountData: _vm.arrCausesBySprintsCounts,
+                                chartLabelsData: _vm.arrCausesBySprintsLabels,
+                              },
+                            })
+                          : _vm._e(),
                       ],
                       1
                     ),
@@ -65549,7 +65830,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Cancel")]
+                        [_vm._v("Отмена")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -65558,7 +65839,7 @@ var render = function () {
                           staticClass: "uk-button uk-button-primary",
                           attrs: { type: "submit" },
                         },
-                        [_vm._v("Save")]
+                        [_vm._v("Сохранить")]
                       ),
                     ]),
                   ]
@@ -65812,6 +66093,44 @@ var render = function () {
                     _c("fieldset", { staticClass: "uk-fieldset" }, [
                       _c("div", { staticClass: "uk-margin" }, [
                         _c("span", { staticClass: "uk-label labelMax" }, [
+                          _vm._v("Спринт"),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.task.Sprint_Name,
+                              expression: "task.Sprint_Name",
+                            },
+                          ],
+                          staticClass: "uk-input uk-form-width-large",
+                          attrs: {
+                            disabled: "",
+                            type: "text",
+                            placeholder: "Спринт",
+                          },
+                          domProps: { value: _vm.task.Sprint_Name },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.task,
+                                "Sprint_Name",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("hr", { staticClass: "uk-divider-icon" }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "uk-margin" }, [
+                        _c("span", { staticClass: "uk-label labelMax" }, [
                           _vm._v("Плановое время"),
                         ]),
                         _vm._v(" "),
@@ -65879,8 +66198,6 @@ var render = function () {
                             })
                           : _vm._e(),
                       ]),
-                      _vm._v(" "),
-                      _c("hr", { staticClass: "uk-divider-icon" }),
                       _vm._v(" "),
                       _c("div", { staticClass: "uk-margin" }, [
                         _c("span", { staticClass: "uk-label labelMax" }, [

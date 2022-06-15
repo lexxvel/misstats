@@ -45,8 +45,8 @@
                                 <input class="uk-input" v-model="form.Person_TableId" type="text" placeholder="Табельный номер (Не обязательно)">
                             </div>
 
-                            <button class="uk-button uk-button-default uk-modal-close" type="button" @click="clearAddTaskForm()">Cancel</button>
-                            <button class="uk-button uk-button-primary" type="submit">Save</button>
+                            <button class="uk-button uk-button-default uk-modal-close" type="button" @click="clearAddTaskForm()">Отмена</button>
+                            <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
                         </fieldset>
                     </form>
                 </div>

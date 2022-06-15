@@ -9,7 +9,7 @@
             </a>
         </div>
         <div class="task-header-sprint">
-            <p>Team Стационар 1 - Спринт 22-11</p>
+            <p>{{Sprint_Name}}</p>
         </div>
         <div class="task-header-plan">
             <p>План: {{Task_Plantime}}</p>
@@ -67,6 +67,10 @@ export default {
             default: null
         },
         Task_FailpersonFullName:{
+            type: String,
+            default: ""
+        },
+        Sprint_Name:{
             type: String,
             default: ""
         }

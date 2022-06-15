@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\v1\OrdersController;
 use App\Http\Controllers\Api\v1\CausesController;
 use App\Http\Controllers\Api\v1\PersonsController;
 use App\Http\Controllers\Api\v1\SprintsController;
+use App\Http\Controllers\Api\v1\SprintscauseslinkController;
 use App\Http\Kernel;
 use App\Http\Middleware\TokenValidation;
 
@@ -55,3 +56,5 @@ Route::get('persons/top/topFiveFailPersons', [PersonsController::class, 'getTopF
 
 Route::post('sprints', [SprintsController::class, 'getSprints']);
 Route::post('sprints/add', [SprintsController::class, 'addSprint']);
+
+Route::post('sprintCausesLink/bySprint', [SprintscauseslinkController::class, 'getTopFiveCausesBySprint']);

@@ -1,6 +1,6 @@
 <template>
 
-<div class="uk-card uk-width-1-3@m">
+<div class="uk-card-person uk-width-1-3@m">
     <div class="btnEditItem">
         <a @click="openPersonEdit()" class="btnEditItem">
             <img class="btnEditItemIcon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fcustom-icon-design%2Fflatastic-1%2F512%2Fedit-icon.png&f=1&nofb=1" alt="">
@@ -71,7 +71,7 @@ export default {
     max-height: 40px;
 }
 
-.uk-card{
+.uk-card-person{
     margin: 10px 15px 10px 15px;
     display: block;
     border:1px solid black;

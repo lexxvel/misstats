@@ -12,13 +12,18 @@
                 <form class="edit-task" @submit.prevent="" method="POST">
                     <fieldset class="uk-fieldset"> 
                         
+                        <div class="uk-margin"> 
+                            <span class="uk-label labelMax">Спринт</span>
+                            <input disabled class="uk-input uk-form-width-large" v-model="task.Sprint_Name" type="text" placeholder="Спринт">
+                        </div>
+
+                        <hr class="uk-divider-icon">
+
                         <div class="uk-margin">
                             <span class="uk-label labelMax">Плановое время</span>
                             <input required class="uk-input uk-form-width-large" v-if="task.Task_Plantime == null" v-model="form.Task_Plantime" type="text" placeholder="Планируемое время выполнения">
                             <input disabled class="uk-input uk-form-width-large" v-if="task.Task_Plantime !== null" v-model="task.Task_Plantime" type="text" placeholder="Планируемое время выполнения">
                         </div>
-
-                        <hr class="uk-divider-icon">
 
                         <div class="uk-margin">
                             <span class="uk-label labelMax">Фактические трудозатраты</span>

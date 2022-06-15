@@ -14,7 +14,6 @@
             </div>
             <button class="BtnFilterAccept uk-button uk-button-primary uk-button-small" @click="loadTasksByCat">Применить</button>
         </div>
-        
     </div>
  
         <spin v-if="loading"></spin>
@@ -30,6 +29,7 @@
                 :Task_Failcause="task.Cause_Name"
                 :Task_Failperson="task.Task_Failperson"
                 :Task_FailpersonFullName="task.Person_Fullname"
+                :Sprint_Name="task.Sprint_Name"
                  />
         </div>
 
@@ -42,9 +42,21 @@
                         </div>
                         
                         <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-select">Спринт</label>
+                            <div class="uk-form-controls">
+                                <select required v-model="form.Task_SprintName" class="uk-select" id="form-horizontal-select">
+                                    <options v-for="sprint in Sprints"
+                                    :key="sprint.Sprint_id"
+                                    :Option="sprint.Sprint_Name"
+                                    />
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
                             <input required class="uk-input" v-model="form.Task_Plantime" type="text" placeholder="Оценка трудозатрат">
                         </div>
-                        
+
                         <div class="uk-margin">
                             <input class="uk-input" v-model="form.Task_Facttime" type="text" placeholder="Фактические трудозатраты">
                         </div>
@@ -73,8 +85,8 @@
                             </div>
                         </div>
 
-                        <button class="uk-button uk-button-default uk-modal-close" type="button" @click="clearAddTaskForm()">Cancel</button>
-                        <button class="uk-button uk-button-primary" type="submit">Save</button>
+                        <button class="uk-button uk-button-default uk-modal-close" type="button" @click="clearAddTaskForm()">Отмена</button>
+                        <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
                     </fieldset>
                 </form>
             </div>
@@ -92,6 +104,7 @@
 import Spin from './Spin.vue';
 import TaskCard from './TaskCard.vue';
 import Options from './Options.vue';
+import axios from 'axios';
 //import { resolveSoa } from 'dns';
 
 export default {
@@ -110,10 +123,12 @@ export default {
                 Task_Plantime : "",
                 Task_Facttime : "",
                 Task_Failcause : "",
-                Task_Failperson : ""
+                Task_Failperson : "",
+                Task_SprintName: ""
             },
             CauseOptions: [], 
             Persons: [],
+            Sprints: [],
             filteredTasks: [],
             tasksLenght: 0
     }),
@@ -261,12 +276,27 @@ export default {
                     }
                 })
         },
+        loadSprints() {
+            axios.post('/api/sprints', {
+                'User_id': this.User_id
+            }).then(res => {
+                if (res.data.status == false ) {
+                     this.Sprints = [];
+                    UIkit.notification({message: res.data.message, status: 'danger'});
+                } else if (res.data){
+                    this.Sprints = res.data;
+                } else {
+                    UIkit.notification({message: "При загрузке спринтов произошла ошибка!", status: 'danger'});
+                }
+            });
+        },
         clearAddTaskForm(){
              this.form.Task_Number = "";
              this.form.Task_Plantime = "";
              this.form.Task_Facttime = "";
              this.form.Task_Failcause = "";
              this.form.Task_Failperson = "";
+             this.form.Task_SprintName = "";
         },
         addTask: function () {
             axios.post('/api/tasks/add', {
@@ -274,7 +304,8 @@ export default {
                 Task_Plantime: this.form.Task_Plantime,
                 Task_Facttime: this.form.Task_Facttime,
                 Task_Failcause: this.form.Task_Failcause,
-                Task_Failperson: this.form.Task_Failperson
+                Task_Failperson: this.form.Task_Failperson,
+                Task_SprintName: this.form.Task_SprintName
                 })
             .then(res => {
                 if (res.data.status == true) {
@@ -300,6 +331,10 @@ export default {
             this.loadTasks();
             this.loadCauses();
             this.loadPersons();
+            this.loadSprints();
+    },
+    computed: {
+        User_id() { return this.$store.getters.GetID }
     }
 }
 

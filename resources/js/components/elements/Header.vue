@@ -7,7 +7,7 @@
         </router-link>
         <div class="uk-navbar-right">
           <ul class="uk-navbar-nav">
-            <li class="uk-active"><router-link to="/tasks" style="min-height:55px; max-height:55px" v-if="isLoggedIn">Задачи</router-link></li>
+            <li><router-link to="/tasks" style="min-height:55px; max-height:55px" v-if="isLoggedIn">Задачи</router-link></li>
             <li><router-link to="/persons" v-if="getRole === '10' || getRole === '2'" style="min-height:55px; max-height:55px">Пользователи</router-link></li>
             <li><router-link to="/sprints" v-if="isLoggedIn" style="min-height:55px; max-height:55px">Спринты</router-link></li>
             <li><router-link to="/graphs" v-if="getRole === '10' || getRole === '2'" style="min-height:55px; max-height:55px">Графики</router-link></li>

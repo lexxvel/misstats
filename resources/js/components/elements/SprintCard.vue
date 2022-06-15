@@ -8,11 +8,11 @@
     </div> -->
 
     <div class="uk-card-header">
-        <p class="CardItemName uk-text-center@s uk-text-emphasis uk-text-bolder">{{Sprint_Name}}</p>
+        <p class="CardItemName uk-text-center@s uk-text-emphasis">{{Sprint_Name}}</p>
     </div>
 
     <div class="uk-card-body">
-        <p class="uk-text-center@s">{{User_Name}}</p>
+        <p class="uk-text-center@s uk-text-muted">{{User_Name}}</p>
     </div>
     
 </div>
@@ -118,7 +118,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 12pt;
+    font-size: 10pt;
 }
 
 .btnEditItem {
