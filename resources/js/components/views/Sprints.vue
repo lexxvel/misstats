@@ -64,7 +64,11 @@ export default {
         isLoggedIn: false
     }),
     mounted() {
-        this.loadSprints();
+        if (this.$store.getters.isLoggedIn === false) {
+            this.$router.push('/');
+        } else {
+            this.loadSprints();
+        } 
     },
     computed: {
         User_id() { return this.$store.getters.GetID }

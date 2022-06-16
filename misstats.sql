@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Июн 15 2022 г., 20:01
--- Версия сервера: 8.0.26
--- Версия PHP: 8.0.10
+-- Хост: 127.0.0.1:3306
+-- Время создания: Июн 16 2022 г., 21:38
+-- Версия сервера: 8.0.24
+-- Версия PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -163,7 +163,7 @@ INSERT INTO `tasks` (`Task_id`, `Task_Number`, `Task_Plantime`, `Task_Facttime`,
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `User_Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `User_Email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `User_Login` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `User_Password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `User_Role_id` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `api_token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -174,9 +174,9 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `User_Name`, `User_Email`, `User_Password`, `User_Role_id`, `api_token`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'cYSk1q7LmdxGGDgTVXy54wWwyhAAja1q7tQkNWeWghEbSTVx5ozNcJE4q41X', '2022-06-15 19:53:29'),
-(2, 'Team Стационар', 'aleksandr.a.velichko@rtmis.ru', '@TeamStac2022RTMIS', '1', 'IqTQENDKCpFzdkJPy6zJhJCZtt5GYAxYVidhagcJaySlZ2b3tLWtkhvqKMMi', '2022-06-15 19:48:12');
+INSERT INTO `users` (`id`, `User_Name`, `User_Login`, `User_Password`, `User_Role_id`, `api_token`, `updated_at`) VALUES
+(1, 'admin', 'admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', '5u03DiQBZtLwov4rZezXC0KtJ0kmLauZE36GqHna8rBW6IJndtFKSJf8fPqt', '2022-06-16 16:59:42'),
+(2, 'Team Стационар', 'teamStac', '@TeamStac2022RTMIS', '1', 'FkjViofVl62geVrhL3ZX5nkkBJ0fv619Pp9N7HF65LgxZHIY6luHdYTFEPcY', '2022-06-16 18:30:55');
 
 --
 -- Индексы сохранённых таблиц

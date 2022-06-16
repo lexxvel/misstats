@@ -56,5 +56,6 @@ Route::get('persons/top/topFiveFailPersons', [PersonsController::class, 'getTopF
 
 Route::post('sprints', [SprintsController::class, 'getSprints']);
 Route::post('sprints/add', [SprintsController::class, 'addSprint']);
+Route::post('sprint/info', [SprintsController::class, 'getSprintStats']);
 
 Route::post('sprintCausesLink/bySprint', [SprintscauseslinkController::class, 'getTopFiveCausesBySprint']);

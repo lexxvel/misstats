@@ -85,7 +85,11 @@ export default {
             arrCausesBySprintsCounts: []
         }),
         mounted() {
-            this.getTopFiveFailPersons();
+            if (this.$store.getters.isLoggedIn === false) {
+                this.$router.push('/');
+            } else {
+                this.getTopFiveFailPersons();
+            }
         },
         computed: {
             User_id() { return this.$store.getters.GetID }

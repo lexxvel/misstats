@@ -6,14 +6,14 @@
         <div class="contain">
 
             <h3>Добро пожаловать на страницу авторизации!</h3>
-            <p>Для продолжения введите E-mail и пароль ниже:</p>
+            <p>Введите логин и пароль:</p>
             <hr class="uk-divider-icon">
             <form class="login" @submit.prevent="login" method="POST">
                 
                 <fieldset class="uk-fieldset">
                     
                     <div class="uk-margin">
-                        <input required class="uk-input" v-model="form.email" type="email" placeholder="Введите E-mail...">
+                        <input required class="uk-input" v-model="form.login" type="text" placeholder="Введите логин...">
                     </div>
 
                     <div class="uk-margin">
@@ -49,7 +49,7 @@ export default {
         data(){
             return {
                 form: {
-                    email : "",
+                    login : "",
                     password : ""
                 },
 

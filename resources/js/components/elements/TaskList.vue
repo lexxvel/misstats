@@ -328,10 +328,14 @@ export default {
         }
     },
     mounted() {
-            this.loadTasks();
-            this.loadCauses();
-            this.loadPersons();
-            this.loadSprints();
+        console.log("logged in: " + this.$store.getters.isLoggedIn);
+            if (this.$store.getters.isLoggedIn === false) {
+            this.$router.push('/');
+            };
+        this.loadTasks();
+        this.loadCauses();
+        this.loadPersons();
+        this.loadSprints();
     },
     computed: {
         User_id() { return this.$store.getters.GetID }

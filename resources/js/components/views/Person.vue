@@ -90,6 +90,8 @@ export default {
         this.loadPersonInfo(this.$route.params.id);
         if (this.$store.getters.isLoggedIn === true) {
             this.isLoggedIn = true
+        } else {
+            this.$router.push('/');
         }
     },
     methods: {

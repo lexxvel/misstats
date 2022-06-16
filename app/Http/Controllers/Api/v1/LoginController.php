@@ -14,12 +14,12 @@ class LoginController extends Controller
     }
 
     public function loginAuth(Request $request){
-        $email = $request->input('email');
+        $login = $request->input('login');
         $password = $request->input('password');
-        $isexist = users::where('User_Email', $email)
+        $isexist = users::where('User_Login', $login)
         ->where('User_Password', $password )
         ->count();
-        $user = users::where('User_Email', $email) ->first();
+        $user = users::where('User_Login', $login) ->first();
         if ($isexist == 0) {
             return [
                 "status" => false,

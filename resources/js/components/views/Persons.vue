@@ -88,6 +88,9 @@ export default {
         isLoggedIn: false
     }),
     mounted() {
+        if (this.$store.getters.isLoggedIn === false) {
+            this.$router.push('/');
+        }
         this.loadPersons();
     },
     methods: {

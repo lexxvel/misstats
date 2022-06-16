@@ -12,6 +12,7 @@ import Person from "./components/views/Person.vue"
 import Graphs from "./components/views/Graphs"
 import HelloPage from "./components/views/Hello.vue"
 import Sprints from "./components/views/Sprints.vue"
+import Stats from "./components/views/Stats.vue"
 
 const routes = [
     {
@@ -53,6 +54,11 @@ const routes = [
         path: '/sprints',
         name: 'sprints',
         component: Sprints
+    },
+    {
+        path: '/stats',
+        name: 'stats',
+        component: Stats
     }
 
 ]

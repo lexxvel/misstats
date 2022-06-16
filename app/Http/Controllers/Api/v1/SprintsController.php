@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\sprints;
+use App\Models\tasks;
 use App\Models\users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -50,5 +51,18 @@ class SprintsController extends Controller
                 "message" => 'Необходимые параметры не переданы!'
             ];
         }
+    }
+
+    public function getSprintStats(Request $request) {
+        $Sprint_id = $request->input('Sprint_id');
+        $allTasksCount = tasks::where('Task_SprintId', $Sprint_id)->get()->count();
+        $failedTasksCount = tasks::where('Task_SprintId', $Sprint_id)->whereNotIn('Task_Failcause', [101])->get()->count();
+        $allSprintTasks = tasks::where('Task_SprintId', $Sprint_id)->get();
+        
+        return [
+            'allTasksCount' => $allTasksCount,
+            'failedTasksCount' => $failedTasksCount,
+            'tasks' => $allSprintTasks
+        ];
     }
 }

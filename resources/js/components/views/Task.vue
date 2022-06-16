@@ -104,12 +104,14 @@ export default {
         Persons: []
     }),
     mounted(){
-        this.loadTaskInfo(this.$route.params.id);
         if (this.$store.getters.isLoggedIn === true) {
-            this.isLoggedIn = true
+            this.isLoggedIn = true;
+            this.loadTaskInfo(this.$route.params.id);
+            this.loadCauses();
+            this.loadPersons();
+        } else {
+            this.$router.push('/');
         }
-        this.loadCauses();
-        this.loadPersons();
     },
     computed: {
         causesIsEmpty() {
