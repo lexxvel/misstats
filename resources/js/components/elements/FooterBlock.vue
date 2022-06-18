@@ -1,6 +1,6 @@
 <template>
     <div class="footerContain">
-        <p>Copyright © 2022. Rights not reserved yet.</p>
+        <p>Copyright © 2022. All right are reserved.</p>
         <p>Author: Velichko A.A.</p>
         <a href="mailto:aleksandr.a.velichko@rtmis.ru">aleksandr.a.velichko@rtmis.ru</a>
     </div>

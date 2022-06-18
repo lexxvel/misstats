@@ -64269,7 +64269,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "footerContain" }, [
-      _c("p", [_vm._v("Copyright © 2022. Rights not reserved yet.")]),
+      _c("p", [_vm._v("Copyright © 2022. All right are reserved.")]),
       _vm._v(" "),
       _c("p", [_vm._v("Author: Velichko A.A.")]),
       _vm._v(" "),
