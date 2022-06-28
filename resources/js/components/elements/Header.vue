@@ -8,9 +8,9 @@
         <div class="uk-navbar-right">
           <ul class="uk-navbar-nav">
             <li><router-link to="/tasks" style="min-height:55px; max-height:55px" v-if="isLoggedIn">Задачи</router-link></li>
-            <li><router-link to="/persons" v-if="getRole === '10' || getRole === '2'" style="min-height:55px; max-height:55px">Пользователи</router-link></li>
+            <li><router-link to="/persons" v-if="getRole >= 2 && isLoggedIn" style="min-height:55px; max-height:55px">Пользователи</router-link></li>
             <li><router-link to="/sprints" v-if="isLoggedIn" style="min-height:55px; max-height:55px">Спринты</router-link></li>
-            <li><router-link to="/graphs" v-if="getRole === '10' || getRole === '2'" style="min-height:55px; max-height:55px">Графики</router-link></li>
+            <li><router-link to="/graphs" v-if="getRole >= 2 && isLoggedIn" style="min-height:55px; max-height:55px">Графики</router-link></li>
             <li><router-link to="/stats" v-if="isLoggedIn" style="min-height:55px; max-height:55px">Статистика</router-link></li>
             <li class="uk-active" v-if="!isLoggedIn"><router-link to="/login" style="min-height:55px; max-height:55px">Войти</router-link></li>
             <li>

@@ -2,6 +2,10 @@
     <div class="uk-card-sprint uk-width-1-2@m">
         
         <div class="uk-card-header">
+
+            <div class="isActualSprint" v-if="Sprint_isActual === 1">
+                <img class="isActualImg" src="/images/isActual.png" alt="" uk-tooltip="Актуальный спринт">
+            </div>
             <p class="sprintStatsCardName uk-text-center@s uk-text-emphasis uk-text-bolder">{{Sprint_Name}}</p>
         </div>
 
@@ -31,6 +35,10 @@ export default {
         User_Name: {
             Type: String,
             default: "NULL"
+        },
+        Sprint_isActual: {
+            Type: Number,
+            default: null
         }
     },
     data: () => ({

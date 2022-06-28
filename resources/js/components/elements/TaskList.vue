@@ -148,12 +148,15 @@ export default {
         if (tasksLenght / 100 >= 1) {
 
         }
-    }
+    },
+    User_id() { return this.$store.getters.GetID }
     },
     methods: {
         loadTasks: async function() {
             this.loading = true;
-            await axios.get('/api/tasks')
+            await axios.post('/api/tasks', {
+                User_id: this.User_id
+            })
             .then(res => {
                 if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
                     setTimeout(() => {
@@ -175,7 +178,7 @@ export default {
                 this.loadTasks();
             } else if (this.preferCategory == 1) {
                 this.loading = true;
-                axios.post('/api/tasks/byCat', { category: this.preferCategory })
+                axios.post('/api/tasks/byCat', { category: this.preferCategory, User_id: this.User_id })
                 .then(res => {         
                 if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
                     this.tasks = [];

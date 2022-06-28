@@ -38,7 +38,7 @@ Route::get('orders/all', [OrdersController::class, 'getAllOrders']);
 Route::get('orders/items', [OrdersController::class, 'getOrderByID']);
 Route::post('orders/make', [OrdersController::class, 'makeOrder'])->middleware('tokenValidation');
 
-Route::get('tasks', [TasksController::class, 'getAllTasks']);
+Route::post('tasks', [TasksController::class, 'getAllTasks']);
 Route::post('tasks/byCat', [TasksController::class, 'getTasksByCategory']);
 Route::get('tasks/{id}', [TasksController::class, 'getTaskById']);
 Route::post('tasks/add', [TasksController::class, 'addTaskV2']);
@@ -57,5 +57,6 @@ Route::get('persons/top/topFiveFailPersons', [PersonsController::class, 'getTopF
 Route::post('sprints', [SprintsController::class, 'getSprints']);
 Route::post('sprints/add', [SprintsController::class, 'addSprint']);
 Route::post('sprint/info', [SprintsController::class, 'getSprintStats']);
+Route::post('sprints/changeActual', [SprintsController::class, 'changeActualSprint']);
 
 Route::post('sprintCausesLink/bySprint', [SprintscauseslinkController::class, 'getTopFiveCausesBySprint']);

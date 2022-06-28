@@ -1,11 +1,9 @@
 <template>
 
 <div class="uk-card uk-width-1-3@m">
-   <!-- <div class="btnEditItem">
-        <a @click="openPersonEdit()" class="btnEditItem">
-            <img class="btnEditItemIcon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fcustom-icon-design%2Fflatastic-1%2F512%2Fedit-icon.png&f=1&nofb=1" alt="">
-        </a>
-    </div> -->
+    <div class="isActualSprint" v-if="Sprint_isActual === 1">
+        <img class="isActualImg" src="/images/isActual.png" alt="" uk-tooltip="Актуальный спринт">
+    </div>
 
     <div class="uk-card-header">
         <p class="CardItemName uk-text-center@s uk-text-emphasis">{{Sprint_Name}}</p>
@@ -38,6 +36,10 @@ export default {
             User_Name:{
                 type: String,
                 default: "NULL"
+            },
+            Sprint_isActual:{
+                type: Number,
+                default: null
             }
         },
         data: () => ({
@@ -51,7 +53,7 @@ export default {
                 this.$router.push('/person/'+this.Person_id).catch(()=>{})
             }
         },
-        name: "PersonCard"
+        name: "SprintCard"
     }
 </script>
 
@@ -121,14 +123,14 @@ export default {
     font-size: 10pt;
 }
 
-.btnEditItem {
+.isActualSprint {
     position: absolute;
     z-index:  100;
     margin: 0 0 0 0;
     height: auto;
 }
 
-.btnEditItemIcon{
+.isActualImg{
     min-height: 20px; 
     max-height: 20px;
     min-width: 20px;

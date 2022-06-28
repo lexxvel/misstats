@@ -21834,8 +21834,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Sprint_id: {
@@ -21853,6 +21851,10 @@ __webpack_require__.r(__webpack_exports__);
     User_Name: {
       type: String,
       "default": "NULL"
+    },
+    Sprint_isActual: {
+      type: Number,
+      "default": null
     }
   },
   data: function data() {
@@ -21864,7 +21866,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push('/person/' + this.Person_id)["catch"](function () {});
     }
   },
-  name: "PersonCard"
+  name: "SprintCard"
 });
 
 /***/ }),
@@ -21899,6 +21901,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Sprint_id: {
@@ -21912,6 +21918,10 @@ __webpack_require__.r(__webpack_exports__);
     User_Name: {
       Type: String,
       "default": "NULL"
+    },
+    Sprint_isActual: {
+      Type: Number,
+      "default": null
     }
   },
   data: function data() {
@@ -22272,6 +22282,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.tasksLenght = this.tasks.length;
 
       if (tasksLenght / 100 >= 1) {}
+    },
+    User_id: function User_id() {
+      return this.$store.getters.GetID;
     }
   },
   methods: {
@@ -22285,7 +22298,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 this.loading = true;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default().get('/api/tasks').then(function (res) {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/tasks', {
+                  User_id: this.User_id
+                }).then(function (res) {
                   if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
                     setTimeout(function () {
                       _this.loading = false;
@@ -22323,7 +22338,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else if (this.preferCategory == 1) {
         this.loading = true;
         axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/tasks/byCat', {
-          category: this.preferCategory
+          category: this.preferCategory,
+          User_id: this.User_id
         }).then(function (res) {
           if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
             _this2.tasks = [];
@@ -23533,6 +23549,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -23552,10 +23586,20 @@ __webpack_require__.r(__webpack_exports__);
       loading: true,
       sprints: [],
       form: {
-        Sprint_Name: ""
+        Sprint_Name: "",
+        Sprint_isActual: ""
       },
       not_found: false,
-      isLoggedIn: false
+      isLoggedIn: false,
+      sprintEditing: false,
+      newActualSprint: "",
+      YesNoValues: [{
+        id: 0,
+        label: "Нет"
+      }, {
+        id: 1,
+        label: "Да"
+      }]
     };
   },
   mounted: function mounted() {
@@ -23568,6 +23612,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     User_id: function User_id() {
       return this.$store.getters.GetID;
+    },
+    User_Role_id: function User_Role_id() {
+      return this.$store.getters.GetRole;
     }
   },
   methods: {
@@ -23595,7 +23642,8 @@ __webpack_require__.r(__webpack_exports__);
     addSprint: function addSprint() {
       axios__WEBPACK_IMPORTED_MODULE_5___default().post('/api/sprints/add', {
         User_id: this.User_id,
-        Sprint_Name: this.form.Sprint_Name
+        Sprint_Name: this.form.Sprint_Name,
+        Sprint_isActual: this.form.Sprint_isActual
       }).then(function (res) {
         if (res.data.status == true) {
           UIkit.notification({
@@ -23624,6 +23672,37 @@ __webpack_require__.r(__webpack_exports__);
      */
     clearAddSprintForm: function clearAddSprintForm() {
       this.form.Sprint_Name = "";
+    },
+    changeActualSprint: function changeActualSprint() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_5___default().post('/api/sprints/changeActual', {
+        User_id: this.User_id,
+        Sprint_Name: this.newActualSprint
+      }).then(function (res) {
+        if (res.data.status == true) {
+          UIkit.notification({
+            message: res.data.message,
+            status: 'success'
+          });
+        } else if (res.data.status == false) {
+          UIkit.notification({
+            message: res.data.message,
+            status: 'danger'
+          });
+        } else {
+          UIkit.notification({
+            message: "При изменении актуального спринта произошла непредвиденная ошибка",
+            status: 'danger'
+          });
+        }
+
+        _this2.sprints = [];
+
+        _this2.loadSprints();
+
+        _this2.sprintEditing = false;
+      });
     }
   }
 });
@@ -23646,6 +23725,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elements_SprintStatsCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../elements/SprintStatsCard.vue */ "./resources/js/components/elements/SprintStatsCard.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+//
 //
 //
 //
@@ -42946,7 +43026,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 10pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 10pt;\n}\n.isActualSprint {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.isActualImg{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64347,7 +64427,7 @@ var render = function () {
                 _c(
                   "li",
                   [
-                    _vm.getRole === "10" || _vm.getRole === "2"
+                    _vm.getRole >= 2 && _vm.isLoggedIn
                       ? _c(
                           "router-link",
                           {
@@ -64387,7 +64467,7 @@ var render = function () {
                 _c(
                   "li",
                   [
-                    _vm.getRole === "10" || _vm.getRole === "2"
+                    _vm.getRole >= 2 && _vm.isLoggedIn
                       ? _c(
                           "router-link",
                           {
@@ -64698,6 +64778,19 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "uk-card uk-width-1-3@m" }, [
+    _vm.Sprint_isActual === 1
+      ? _c("div", { staticClass: "isActualSprint" }, [
+          _c("img", {
+            staticClass: "isActualImg",
+            attrs: {
+              src: "/images/isActual.png",
+              alt: "",
+              "uk-tooltip": "Актуальный спринт",
+            },
+          }),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "uk-card-header" }, [
       _c(
         "p",
@@ -64738,6 +64831,19 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "uk-card-sprint uk-width-1-2@m" }, [
     _c("div", { staticClass: "uk-card-header" }, [
+      _vm.Sprint_isActual === 1
+        ? _c("div", { staticClass: "isActualSprint" }, [
+            _c("img", {
+              staticClass: "isActualImg",
+              attrs: {
+                src: "/images/isActual.png",
+                alt: "",
+                "uk-tooltip": "Актуальный спринт",
+              },
+            }),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "p",
         {
@@ -66440,6 +66546,78 @@ var render = function () {
           [_vm._v("Добавить")]
         ),
         _vm._v(" "),
+        _vm.User_Role_id === "1" && _vm.sprintEditing == false
+          ? _c(
+              "button",
+              {
+                staticClass: "uk-button uk-button-primary",
+                attrs: { id: "changeActualSprint", href: "#" },
+                on: {
+                  click: function ($event) {
+                    _vm.sprintEditing = !_vm.sprintEditing
+                  },
+                },
+              },
+              [_vm._v("Сменить актуальный")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.sprintEditing
+          ? _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newActualSprint,
+                    expression: "newActualSprint",
+                  },
+                ],
+                staticClass: "uk-select",
+                attrs: { required: "", id: "form-horizontal-select" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.newActualSprint = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                },
+              },
+              _vm._l(_vm.sprints, function (sprint) {
+                return _c("options", {
+                  key: sprint.Sprint_id,
+                  attrs: { Option: sprint.Sprint_Name },
+                })
+              }),
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.sprintEditing
+          ? _c(
+              "button",
+              {
+                staticClass: "uk-button uk-button-primary",
+                attrs: { id: "changeActualSprintActionBtn" },
+                on: {
+                  click: function ($event) {
+                    return _vm.changeActualSprint()
+                  },
+                },
+              },
+              [_vm._v("Сменить")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _vm.loading
           ? _c("spin")
           : !_vm.loading && !_vm.not_found
@@ -66453,6 +66631,7 @@ var render = function () {
                     Sprint_Name: sprint.Sprint_Name,
                     Sprint_UserId: sprint.Sprint_UserId,
                     User_Name: sprint.User_Name,
+                    Sprint_isActual: sprint.Sprint_isActual,
                   },
                 })
               }),
@@ -66491,6 +66670,15 @@ var render = function () {
                   [
                     _c("fieldset", { staticClass: "uk-fieldset" }, [
                       _c("div", { staticClass: "uk-margin" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "uk-form-label",
+                            attrs: { for: "form-horizontal-select" },
+                          },
+                          [_vm._v("Название спринта")]
+                        ),
+                        _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
@@ -66505,7 +66693,7 @@ var render = function () {
                             required: "",
                             type: "text",
                             placeholder:
-                              "Название спринта, например Team Стационар - Спринт 22-22",
+                              "Например: Team Стационар - Спринт 22-22",
                           },
                           domProps: { value: _vm.form.Sprint_Name },
                           on: {
@@ -66521,6 +66709,63 @@ var render = function () {
                             },
                           },
                         }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "uk-margin" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "uk-form-label",
+                            attrs: { for: "form-horizontal-select" },
+                          },
+                          [_vm._v("Актуальный спринт?")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.Sprint_isActual,
+                                expression: "form.Sprint_isActual",
+                              },
+                            ],
+                            staticClass: "uk-select",
+                            attrs: {
+                              required: "",
+                              id: "form-horizontal-select",
+                              "aria-label": "Актуальный спринт?",
+                            },
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "Sprint_isActual",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                            },
+                          },
+                          _vm._l(_vm.YesNoValues, function (YesNoValue) {
+                            return _c("options", {
+                              key: YesNoValue.id,
+                              attrs: { Option: YesNoValue.label },
+                            })
+                          }),
+                          1
+                        ),
                       ]),
                       _vm._v(" "),
                       _c(
@@ -66623,6 +66868,7 @@ var render = function () {
                             Sprint_id: sprint.Sprint_id,
                             Sprint_Name: sprint.Sprint_Name,
                             User_Name: sprint.User_Name,
+                            Sprint_isActual: sprint.Sprint_isActual,
                           },
                         })
                       }),

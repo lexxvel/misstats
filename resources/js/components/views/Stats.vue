@@ -20,6 +20,7 @@
                                 :Sprint_id="sprint.Sprint_id"
                                 :Sprint_Name="sprint.Sprint_Name"
                                 :User_Name="sprint.User_Name"
+                                :Sprint_isActual="sprint.Sprint_isActual"
                             />
                         </div>
                     </li>
