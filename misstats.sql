@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июн 16 2022 г., 21:38
--- Версия сервера: 8.0.24
--- Версия PHP: 7.4.27
+-- Хост: localhost
+-- Время создания: Июн 29 2022 г., 12:05
+-- Версия сервера: 8.0.26
+-- Версия PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,10 +40,10 @@ CREATE TABLE `causes` (
 --
 
 INSERT INTO `causes` (`Cause_id`, `Cause_Name`, `Cause_Failcount`, `Cause_Type`, `updated_at`) VALUES
-(1, 'Не все учтено при оценке', 1, NULL, '2022-06-10 20:12:28'),
-(2, 'Затянута разработка', 6, NULL, '2022-06-15 19:46:48'),
+(1, 'Не все учтено при оценке', 2, NULL, '2022-06-28 19:17:19'),
+(2, 'Затянута разработка', 7, NULL, '2022-06-28 19:15:49'),
 (3, 'Много ошибок', 3, NULL, '2022-06-15 19:32:13'),
-(101, 'Не указана', NULL, NULL, NULL);
+(101, 'Не указана', 1, NULL, '2022-06-28 19:33:07');
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE `persons` (
 
 INSERT INTO `persons` (`Person_id`, `Person_Name`, `Person_Secname`, `Person_Surname`, `Person_Fullname`, `Person_Email`, `Person_TableId`, `Person_Failcount`, `updated_at`) VALUES
 (1, 'Тестан', 'Тестовиич', 'Тестенко', 'Тестенко Тестан Тестовиич', 'test@rtmi.ru', '00011', 3, '2022-06-15 19:46:48'),
-(2, 'Александр', 'Андреевич', 'Величко', 'Величко Александр Андреевич', 'aleksandr.a.velichko@rtmis.ru', NULL, 1, NULL),
+(2, 'Александр', 'Андреевич', 'Величко', 'Величко Александр Андреевич', 'aleksandr.a.velichko@rtmis.ru', NULL, 2, '2022-06-28 19:16:25'),
 (101, 'Не указан', 'Не указан', 'Не указан', 'Не указан', 'Не указан', NULL, NULL, NULL),
 (102, 'Иван', 'Иванович', 'Иванов', 'Иванов Иван Иванович', 'test@test.rt', NULL, 2, '2022-06-11 17:51:52');
 
@@ -83,6 +83,7 @@ CREATE TABLE `sprints` (
   `Sprint_id` int NOT NULL,
   `Sprint_Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Sprint_UserId` int NOT NULL,
+  `Sprint_isActual` int DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -90,10 +91,11 @@ CREATE TABLE `sprints` (
 -- Дамп данных таблицы `sprints`
 --
 
-INSERT INTO `sprints` (`Sprint_id`, `Sprint_Name`, `Sprint_UserId`, `updated_at`) VALUES
-(1, 'Team Стационар - Спринт 22-12', 2, '2022-06-14 17:47:29'),
-(2, 'Team Поликлиника - Спринт 22-12', 1, NULL),
-(3, 'Team Стационар - Спринт 22-11', 2, NULL);
+INSERT INTO `sprints` (`Sprint_id`, `Sprint_Name`, `Sprint_UserId`, `Sprint_isActual`, `updated_at`) VALUES
+(1, 'Team Стационар - Спринт 22-12', 2, 0, '2022-06-28 12:18:22'),
+(2, 'Team Поликлиника - Спринт 22-12', 1, 0, NULL),
+(3, 'Team Стационар - Спринт 22-11', 2, 0, '2022-06-28 11:41:20'),
+(5, 'Team Стационар - Спринт 22-13', 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,9 @@ INSERT INTO `sprintscauseslink` (`Sprintscauseslink_id`, `Sprint_id`, `User_id`,
 (1, 1, 2, 1, 1, NULL),
 (2, 1, 2, 2, 3, '2022-06-15 19:30:24'),
 (3, 1, NULL, 3, 1, NULL),
-(4, 2, NULL, 2, 3, '2022-06-15 19:46:48');
+(4, 2, NULL, 2, 3, '2022-06-15 19:46:48'),
+(6, 5, NULL, 2, 1, NULL),
+(7, 2, NULL, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -144,15 +148,18 @@ CREATE TABLE `tasks` (
 INSERT INTO `tasks` (`Task_id`, `Task_Number`, `Task_Plantime`, `Task_Facttime`, `Task_Failcause`, `Task_Failperson`, `Task_SprintId`, `updated_at`) VALUES
 (1, '87900', 0.2, 1.7, 2, 102, 1, '2022-06-10 20:48:03'),
 (11, '124', 0.1, 0.2, 3, 2, 2, '2022-06-10 20:06:22'),
-(16, '22', 322, 2, 1, 101, 3, '2022-06-10 20:12:28'),
+(16, '22', 322, 2, 1, 2, 3, '2022-06-28 19:16:25'),
 (17, '1', 1, 2.5, 3, 102, 1, '2022-06-10 20:15:24'),
-(28, '121212', 0.2, NULL, 101, 1, 2, '2022-06-11 19:46:51'),
+(28, '121212', 0.2, NULL, 1, 1, 2, '2022-06-28 19:17:19'),
 (33, '7676', 1, NULL, 2, 101, 1, '2022-06-15 19:30:24'),
 (34, '9999', 1, NULL, 3, 101, 1, '2022-06-15 19:32:13'),
 (35, '8989', 1, NULL, 101, 101, 2, NULL),
 (36, '5444', 1, NULL, 2, 101, 2, '2022-06-15 19:38:21'),
 (37, '423', 1, 2, 2, 1, 2, '2022-06-15 19:39:08'),
-(38, '6565654', 1, NULL, 2, 1, 2, '2022-06-15 19:46:48');
+(38, '6565654', 1, NULL, 2, 1, 2, '2022-06-15 19:46:48'),
+(39, '5654654', 1, 5, 101, 101, 1, '2022-06-18 07:07:11'),
+(40, '765756', 1, 1.2, 101, 101, 1, '2022-06-18 07:24:12'),
+(41, '111222', 1, 1, 2, 101, 5, '2022-06-28 19:15:49');
 
 -- --------------------------------------------------------
 
@@ -175,8 +182,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `User_Name`, `User_Login`, `User_Password`, `User_Role_id`, `api_token`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', '5u03DiQBZtLwov4rZezXC0KtJ0kmLauZE36GqHna8rBW6IJndtFKSJf8fPqt', '2022-06-16 16:59:42'),
-(2, 'Team Стационар', 'teamStac', '@TeamStac2022RTMIS', '1', 'FkjViofVl62geVrhL3ZX5nkkBJ0fv619Pp9N7HF65LgxZHIY6luHdYTFEPcY', '2022-06-16 18:30:55');
+(1, 'admin', 'admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'voQ5S9aRQ3SmtYwCVoltG9gr6MSDljXFTXXCM5AkD5jnrNOWEBgdmm3RGtBh', '2022-06-28 13:03:28'),
+(2, 'Team Стационар', 'teamStac', '@TeamStac2022RTMIS', '1', 'w29LzU02IXVTpgUVIatO8XmA3vYg5MbvuL0KW39xHICr6FUDn2rO3rNKj5Vd', '2022-06-28 07:43:29');
 
 --
 -- Индексы сохранённых таблиц
@@ -238,19 +245,19 @@ ALTER TABLE `persons`
 -- AUTO_INCREMENT для таблицы `sprints`
 --
 ALTER TABLE `sprints`
-  MODIFY `Sprint_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Sprint_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `sprintscauseslink`
 --
 ALTER TABLE `sprintscauseslink`
-  MODIFY `Sprintscauseslink_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Sprintscauseslink_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `Task_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `Task_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
