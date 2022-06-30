@@ -55,6 +55,27 @@ class TasksController extends Controller
             //проблемные задачи
         } else if ($category === 3) {
             //Не проблемные задачи
+        } else if ($category === 4) {
+            if ($role > 1) {
+                return tasks::join('causes', 'tasks.Task_Failcause', '=', 'causes.Cause_id')
+                ->join('persons', 'tasks.Task_Failperson', '=', 'persons.Person_id')
+                ->join('sprints', 'tasks.Task_SprintId', '=', 'sprints.Sprint_id')
+                ->select('tasks.*', 'causes.Cause_Name', 'persons.Person_Fullname', 'sprints.Sprint_id', 'sprints.Sprint_Name')
+                ->where('sprints.Sprint_isActual', 1)
+                ->orderBy('Task_id', 'DESC')
+                ->get()
+                ->reverse();
+            } else if ($role == 1) {
+                return tasks::join('causes', 'tasks.Task_Failcause', '=', 'causes.Cause_id')
+                ->join('persons', 'tasks.Task_Failperson', '=', 'persons.Person_id')
+                ->join('sprints', 'tasks.Task_SprintId', '=', 'sprints.Sprint_id')
+                ->select('tasks.*', 'causes.Cause_Name', 'persons.Person_Fullname', 'sprints.Sprint_id', 'sprints.Sprint_Name')
+                ->where('sprints.Sprint_isActual', 1)
+                ->where('sprints.Sprint_UserId', $user_id)
+                ->orderBy('Task_id', 'DESC')
+                ->get()
+                ->reverse();
+            }
         } else {
             return [
                 "status" => false,

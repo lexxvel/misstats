@@ -8,6 +8,7 @@
         <div>
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                 <label><input class="uk-radio" id="radioMain" type="radio" name="radio2" @click="changePreferCat(0)" checked> Все</label>
+                <label><input class="uk-radio" type="radio" name="radio2" @click="changePreferCat(4)"> Актуальные</label>
                 <label><input class="uk-radio" type="radio" name="radio2" @click="changePreferCat(1)"> Без итога</label>
                 <label><input class="uk-radio" type="radio" name="radio2" @click="changePreferCat(2)"> Проблемные</label>
                 <label><input class="uk-radio" type="radio" name="radio2" @click="changePreferCat(3)"> Не проблемные</label>
@@ -246,6 +247,20 @@ export default {
                             this.tasks.push(el);
                         }
                     }*/
+                } else if (this.preferCategory == 4) {  //актуальные
+                    this.loading = true;
+                    axios.post('/api/tasks/byCat', { category: this.preferCategory, User_id: this.User_id })
+                        .then(res => {         
+                            if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
+                                this.tasks = [];
+                                this.not_found = true;
+                            } else {
+                                this.tasks = res.data;
+                            }
+                            setTimeout(() => {
+                                this.loading = false;
+                            },  200)
+                        })
                 } else {
                     //
                 }

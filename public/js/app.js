@@ -22235,6 +22235,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -22434,6 +22435,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.tasks.push(el);
               }
           }*/
+        } else if (this.preferCategory == 4) {
+          //актуальные
+          this.loading = true;
+          axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/tasks/byCat', {
+            category: this.preferCategory,
+            User_id: this.User_id
+          }).then(function (res) {
+            if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
+              _this2.tasks = [];
+              _this2.not_found = true;
+            } else {
+              _this2.tasks = res.data;
+            }
+
+            setTimeout(function () {
+              _this2.loading = false;
+            }, 200);
+          });
         } else {//
         }
       }
@@ -65052,6 +65071,19 @@ var render = function () {
                   },
                 }),
                 _vm._v(" Все"),
+              ]),
+              _vm._v(" "),
+              _c("label", [
+                _c("input", {
+                  staticClass: "uk-radio",
+                  attrs: { type: "radio", name: "radio2" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.changePreferCat(4)
+                    },
+                  },
+                }),
+                _vm._v(" Актуальные"),
               ]),
               _vm._v(" "),
               _c("label", [
