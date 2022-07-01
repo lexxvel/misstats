@@ -64456,7 +64456,7 @@ var render = function () {
                             },
                             attrs: { to: "/persons" },
                           },
-                          [_vm._v("Пользователи")]
+                          [_vm._v("Сотрудники")]
                         )
                       : _vm._e(),
                   ],
@@ -66264,7 +66264,7 @@ var render = function () {
       "div",
       { staticClass: "personsWindow" },
       [
-        _c("h3", { staticClass: "uk-text-muted" }, [_vm._v("Пользователи")]),
+        _c("h3", { staticClass: "uk-text-muted" }, [_vm._v("Сотрудники")]),
         _vm._v(" "),
         _c(
           "button",
@@ -66523,7 +66523,7 @@ var render = function () {
         _vm._v(" "),
         _vm.not_found
           ? _c("div", { attrs: { "uk-alert": "" } }, [
-              _c("h3", [_vm._v("Пользователи ещё не добавлены!")]),
+              _c("h3", [_vm._v("Сотрудники ещё не добавлены!")]),
             ])
           : _vm._e(),
       ],

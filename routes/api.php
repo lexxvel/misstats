@@ -4,9 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\TasksController;
 use App\Http\Controllers\Api\v1\LoginController;
-use App\Http\Controllers\Api\v1\CategoryController;
-use App\Http\Controllers\Api\v1\BasketController;
-use App\Http\Controllers\Api\v1\OrdersController;
 use App\Http\Controllers\Api\v1\CausesController;
 use App\Http\Controllers\Api\v1\PersonsController;
 use App\Http\Controllers\Api\v1\SprintsController;
@@ -27,16 +24,6 @@ use App\Http\Middleware\TokenValidation;
 
 Route::get('users', [LoginController::class, 'getAllUsers']);
 Route::post('login', [LoginController::class, 'loginAuth']);
-
-Route::get('basket', [BasketController::class, 'getUserBasket'])->middleware('tokenValidation');
-Route::post('basket/add', [BasketController::class, 'addToBasket'])->middleware('tokenValidation');
-Route::post('basket/control', [BasketController::class, 'controlBasketItems'])->middleware('tokenValidation');
-Route::get('basket/getOrderCost/{userid}', [OrdersController::class, 'getOrderSum']);
-
-Route::get('orders', [OrdersController::class, 'getOrdersListByUserID'])->middleware('tokenValidation');
-Route::get('orders/all', [OrdersController::class, 'getAllOrders']);
-Route::get('orders/items', [OrdersController::class, 'getOrderByID']);
-Route::post('orders/make', [OrdersController::class, 'makeOrder'])->middleware('tokenValidation');
 
 Route::post('tasks', [TasksController::class, 'getAllTasks']);
 Route::post('tasks/byCat', [TasksController::class, 'getTasksByCategory']);

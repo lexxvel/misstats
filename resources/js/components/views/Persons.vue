@@ -4,7 +4,7 @@
             <v-header></v-header>
         </div>
         <div class="personsWindow">
-            <h3 class="uk-text-muted">Пользователи</h3>
+            <h3 class="uk-text-muted">Сотрудники</h3>
             <button id="modalBtn" class="uk-button uk-button-primary" href="#modal-addPerson-center" uk-toggle>Добавить</button>
 
             <spin v-if="loading"></spin>
@@ -54,7 +54,7 @@
 
 
             <div uk-alert v-if="not_found">
-                <h3>Пользователи ещё не добавлены!</h3>
+                <h3>Сотрудники ещё не добавлены!</h3>
             </div>
         </div>
         <div class="footer">
