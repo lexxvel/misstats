@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Июн 29 2022 г., 12:05
--- Версия сервера: 8.0.26
--- Версия PHP: 8.0.10
+-- Время создания: Июл 07 2022 г., 01:02
+-- Версия сервера: 8.0.29-0ubuntu0.22.04.2
+-- Версия PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,6 +59,7 @@ CREATE TABLE `persons` (
   `Person_Fullname` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Person_Email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Person_TableId` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Person_PostId` int DEFAULT NULL,
   `Person_Failcount` int DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -67,11 +68,36 @@ CREATE TABLE `persons` (
 -- Дамп данных таблицы `persons`
 --
 
-INSERT INTO `persons` (`Person_id`, `Person_Name`, `Person_Secname`, `Person_Surname`, `Person_Fullname`, `Person_Email`, `Person_TableId`, `Person_Failcount`, `updated_at`) VALUES
-(1, 'Тестан', 'Тестовиич', 'Тестенко', 'Тестенко Тестан Тестовиич', 'test@rtmi.ru', '00011', 3, '2022-06-15 19:46:48'),
-(2, 'Александр', 'Андреевич', 'Величко', 'Величко Александр Андреевич', 'aleksandr.a.velichko@rtmis.ru', NULL, 2, '2022-06-28 19:16:25'),
-(101, 'Не указан', 'Не указан', 'Не указан', 'Не указан', 'Не указан', NULL, NULL, NULL),
-(102, 'Иван', 'Иванович', 'Иванов', 'Иванов Иван Иванович', 'test@test.rt', NULL, 2, '2022-06-11 17:51:52');
+INSERT INTO `persons` (`Person_id`, `Person_Name`, `Person_Secname`, `Person_Surname`, `Person_Fullname`, `Person_Email`, `Person_TableId`, `Person_PostId`, `Person_Failcount`, `updated_at`) VALUES
+(1, 'Тестан', 'Тестовиич', 'Тестенко', 'Тестенко Тестан Тестовиич', 'test@rtmi.ru', '00011', 1, 3, '2022-06-15 19:46:48'),
+(2, 'Александр', 'Андреевич', 'Величко', 'Величко Александр Андреевич', 'aleksandr.a.velichko@rtmis.ru', NULL, 2, 2, '2022-06-28 19:16:25'),
+(101, 'Не указан', 'Не указан', 'Не указан', 'Не указан', 'Не указан', NULL, NULL, NULL, NULL),
+(102, 'Иван', 'Иванович', 'Иванов', 'Иванов Иван Иванович', 'test@test.rt', NULL, 4, 2, '2022-06-11 17:51:52'),
+(103, 'Петр', 'Петрович', 'Петров', 'Петров Петр Петрович', 'petrov@rtmis.ru', '54341', 4, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `posts`
+--
+
+CREATE TABLE `posts` (
+  `Post_id` int NOT NULL,
+  `Post_Name` text NOT NULL,
+  `Post_Type` text,
+  `Post_Department` text,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `posts`
+--
+
+INSERT INTO `posts` (`Post_id`, `Post_Name`, `Post_Type`, `Post_Department`, `updated_at`) VALUES
+(1, 'Инженер по тестированию (функциональному)', 'Тестирование', NULL, NULL),
+(2, 'Ведущий инженер по тестированию (функциональному)', 'Тестирование', NULL, NULL),
+(3, 'Инженер по тестированию (автоматизированному)', NULL, NULL, NULL),
+(4, 'Ведущий инженер по тестированию (автоматизированному)', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -182,7 +208,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `User_Name`, `User_Login`, `User_Password`, `User_Role_id`, `api_token`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'voQ5S9aRQ3SmtYwCVoltG9gr6MSDljXFTXXCM5AkD5jnrNOWEBgdmm3RGtBh', '2022-06-28 13:03:28'),
+(1, 'admin', 'admin', 'm09v3q3M8V53M4*$$%352@#$fer', '10', 'Ux3DTk4xf8n87H4PYu8oAG29dttOcr2y3yCM61Cof52PAhIJFCQinFZqblQN', '2022-07-06 16:31:34'),
 (2, 'Team Стационар', 'teamStac', '@TeamStac2022RTMIS', '1', 'w29LzU02IXVTpgUVIatO8XmA3vYg5MbvuL0KW39xHICr6FUDn2rO3rNKj5Vd', '2022-06-28 07:43:29');
 
 --
@@ -200,6 +226,12 @@ ALTER TABLE `causes`
 --
 ALTER TABLE `persons`
   ADD PRIMARY KEY (`Person_id`);
+
+--
+-- Индексы таблицы `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`Post_id`);
 
 --
 -- Индексы таблицы `sprints`
@@ -239,7 +271,13 @@ ALTER TABLE `causes`
 -- AUTO_INCREMENT для таблицы `persons`
 --
 ALTER TABLE `persons`
-  MODIFY `Person_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `Person_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+
+--
+-- AUTO_INCREMENT для таблицы `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `Post_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `sprints`
