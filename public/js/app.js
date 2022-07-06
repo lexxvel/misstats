@@ -21636,6 +21636,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Person_id: {
@@ -21655,6 +21656,14 @@ __webpack_require__.r(__webpack_exports__);
       "default": 0
     },
     Person_TableId: {
+      type: String,
+      "default": "NULL"
+    },
+    Person_PostId: {
+      type: Number,
+      "default": null
+    },
+    Post_Name: {
       type: String,
       "default": "NULL"
     }
@@ -23117,6 +23126,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -23404,6 +23418,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -23422,12 +23450,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loading: true,
       persons: [],
+      posts: [],
       form: {
         Person_Surname: "",
         Person_Name: "",
         Person_Secname: "",
         Person_Email: "",
-        Person_TableId: ""
+        Person_TableId: "",
+        Person_PostName: ""
       },
       not_found: false,
       isLoggedIn: false
@@ -23439,6 +23469,7 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.loadPersons();
+    this.loadPosts();
   },
   methods: {
     loadPersons: function loadPersons() {
@@ -23460,13 +23491,33 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    loadPosts: function loadPosts() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_5___default().get('/api/posts').then(function (res) {
+        if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
+          setTimeout(function () {
+            _this2.loading = false;
+          }, 50);
+          _this2.posts = [];
+          _this2.not_found = true;
+        } else {
+          _this2.posts = res.data;
+          _this2.not_found = false;
+          setTimeout(function () {
+            _this2.loading = false;
+          }, 50);
+        }
+      });
+    },
     addPerson: function addPerson() {
       axios__WEBPACK_IMPORTED_MODULE_5___default().post('/api/persons/add', {
         Person_Name: this.form.Person_Name,
         Person_Secname: this.form.Person_Secname,
         Person_Surname: this.form.Person_Surname,
         Person_Email: this.form.Person_Email,
-        Person_TableId: this.form.Person_TableId
+        Person_TableId: this.form.Person_TableId,
+        Person_PostName: this.form.Person_PostName
       }).then(function (res) {
         if (res.data.status == true) {
           UIkit.notification({
@@ -42949,7 +43000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.footerContain {\r\n  left: 0;\r\n  bottom: 0;\r\n  width: 100%;\r\n  color: rgb(0, 0, 0);\r\n  text-align: center;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.footerContain {\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  color: rgb(0, 0, 0);\n  text-align: center;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42997,7 +43048,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card-person{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 120px;\r\n    max-height: 120px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 12pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\n    padding: 10px 20px 15px 20px;\n    min-height: 40px;\n    max-height: 40px;\n}\n.uk-card-person{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 300px;\n    max-width: 300px;\n    min-height: 150px;\n    max-height: 150px;\n    position:relative;\n}\n.uk-card:hover{\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\n    max-width: 100%;\n    margin-left:0%;\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\n    margin-top:0%;\n}\n.uk-text-emphasis{\n    font-size: 16px;\n}\n.uk-card-body{\n    padding: 0 10px;\n    min-height: 120px;\n    max-height: 120px;\n}\n.uk-card-footer {\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 40px;\n    max-height: 40px;\n    padding: 10px 20px 10px 20px;\n    position:absolute;\n\tbottom:0;\n}\n.CardItemName {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 12pt;\n}\n.btnEditItem {\n    position: absolute;\n    z-index:  100;\n    margin: 0 0 0 0;\n    height: auto;\n}\n.btnEditItemIcon{\n    min-height: 20px; \n    max-height: 20px;\n    min-width: 20px;\n    max-width: 20px;\n}\n.personPostName{\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43045,7 +43096,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 10pt;\n}\n.isActualSprint {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.isActualImg{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\n    padding: 10px 20px 15px 20px;\n    min-height: 40px;\n    max-height: 40px;\n}\n.uk-card{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 300px;\n    max-width: 300px;\n    min-height: 80px;\n    max-height: 80px;\n    position:relative;\n}\n.uk-card:hover{\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\n    max-width: 100%;\n    margin-left:0%;\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\n    margin-top:0%;\n}\n.uk-text-emphasis{\n    font-size: 16px;\n}\n.uk-card-body{\n    padding: 0 10px;\n    min-height: 120px;\n    max-height: 120px;\n}\n.uk-card-footer {\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 40px;\n    max-height: 40px;\n    padding: 10px 20px 10px 20px;\n    position:absolute;\n\tbottom:0;\n}\n.CardItemName {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 10pt;\n}\n.isActualSprint {\n    position: absolute;\n    z-index:  100;\n    margin: 0 0 0 0;\n    height: auto;\n}\n.isActualImg{\n    min-height: 20px; \n    max-height: 20px;\n    min-width: 20px;\n    max-width: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43069,7 +43120,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintStatsCardName{\r\n    font-size: 12pt;\n}\n.uk-card-sprint{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 465px;\r\n    max-width: 465px;\r\n    min-height: 150px;\r\n    max-height: 150px;\r\n    position:relative;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintStatsCardName{\n    font-size: 12pt;\n}\n.uk-card-sprint{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 465px;\n    max-width: 465px;\n    min-height: 150px;\n    max-height: 150px;\n    position:relative;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43117,7 +43168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\n.about {\r\n   display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n.about {\n   display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43141,7 +43192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43165,7 +43216,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.personsWindow {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.personsWindow {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43189,7 +43240,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintsWindow {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintsWindow {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43213,7 +43264,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.selectSmall {\r\n    display: inline-block;\r\n    width: 500px;\r\n    margin: 0;\r\n    padding: 0px 0px 0px 0px;\n}\n.labelMax {\r\n    margin: 0 1000px 0 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.selectSmall {\n    display: inline-block;\n    width: 500px;\n    margin: 0;\n    padding: 0px 0px 0px 0px;\n}\n.labelMax {\n    margin: 0 1000px 0 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64684,6 +64735,15 @@ var render = function () {
       _c("p", { staticClass: "uk-text-center@s" }, [
         _vm._v("Табельный: " + _vm._s(_vm.Person_TableId)),
       ]),
+      _vm._v(" "),
+      _c(
+        "p",
+        {
+          staticClass: "personPostName uk-text-center@s",
+          attrs: { "uk-tooltip": _vm.Post_Name },
+        },
+        [_vm._v(_vm._s(_vm.Post_Name))]
+      ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "uk-card-footer uk-text-center@s" }, [
@@ -66183,6 +66243,42 @@ var render = function () {
                           },
                         }),
                       ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "uk-margin" }, [
+                        _c("span", { staticClass: "uk-label labelMax" }, [
+                          _vm._v("Должность"),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.person.Post_Name,
+                              expression: "person.Post_Name",
+                            },
+                          ],
+                          staticClass: "uk-input uk-form-width-large",
+                          attrs: {
+                            disabled: "",
+                            type: "text",
+                            placeholder: "Табельный номер, например: 404",
+                          },
+                          domProps: { value: _vm.person.Post_Name },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.person,
+                                "Post_Name",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                      ]),
                     ]),
                   ]
                 ),
@@ -66294,6 +66390,8 @@ var render = function () {
                     Person_Email: person.Person_Email,
                     Person_TableId: person.Person_TableId,
                     Person_Failcount: person.Person_Failcount,
+                    Person_PostId: person.Person_PostId,
+                    Post_Name: person.Post_Name,
                   },
                 })
               }),
@@ -66488,6 +66586,65 @@ var render = function () {
                             },
                           },
                         }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "uk-margin" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "uk-form-label",
+                            attrs: { for: "form-horizontal-select" },
+                          },
+                          [_vm._v("Должность")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "uk-form-controls" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.Person_PostName,
+                                  expression: "form.Person_PostName",
+                                },
+                              ],
+                              staticClass: "uk-select",
+                              attrs: {
+                                required: "",
+                                id: "form-horizontal-select",
+                              },
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "Person_PostName",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            _vm._l(_vm.posts, function (post) {
+                              return _c("options", {
+                                key: post.Post_id,
+                                attrs: { Option: post.Post_Name },
+                              })
+                            }),
+                            1
+                          ),
+                        ]),
                       ]),
                       _vm._v(" "),
                       _c(
