@@ -44,6 +44,11 @@
                             <span class="uk-label labelMax">Табельный номер</span>
                             <input required class="uk-input uk-form-width-large" v-model="form.Person_TableId" type="text" placeholder="Табельный номер, например: 404">
                         </div>
+
+                        <div class="uk-margin">
+                            <span class="uk-label labelMax">Должность</span>
+                            <input disabled class="uk-input uk-form-width-large" v-model="person.Post_Name" type="text" placeholder="Табельный номер, например: 404">
+                        </div>
                      
                     </fieldset>
                 </form>

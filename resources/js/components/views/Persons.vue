@@ -16,6 +16,8 @@
                     :Person_Email="person.Person_Email"
                     :Person_TableId="person.Person_TableId"
                     :Person_Failcount="person.Person_Failcount"
+                    :Person_PostId="person.Person_PostId"
+                    :Post_Name="person.Post_Name"
                     />
             </div>
 
@@ -43,6 +45,18 @@
 
                             <div class="uk-margin">
                                 <input class="uk-input" v-model="form.Person_TableId" type="text" placeholder="Табельный номер (Не обязательно)">
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-select">Должность</label>
+                                <div class="uk-form-controls">
+                                    <select required v-model="form.Person_PostName" class="uk-select" id="form-horizontal-select">
+                                        <options v-for="post in posts"
+                                        :key="post.Post_id"
+                                        :Option="post.Post_Name"
+                                        />
+                                    </select>
+                                </div>
                             </div>
 
                             <button class="uk-button uk-button-default uk-modal-close" type="button" @click="clearAddTaskForm()">Отмена</button>
@@ -77,12 +91,14 @@ export default {
     data: () => ({
         loading: true,
         persons: [],
+        posts: [],
         form: {
             Person_Surname : "",
             Person_Name : "",
             Person_Secname : "",
             Person_Email : "",
-            Person_TableId : ""
+            Person_TableId : "",
+            Person_PostName: ""
         },
         not_found: false,
         isLoggedIn: false
@@ -92,6 +108,7 @@ export default {
             this.$router.push('/');
         }
         this.loadPersons();
+        this.loadPosts();
     },
     methods: {
         loadPersons() {
@@ -112,13 +129,32 @@ export default {
                 }
             })
         },
+        loadPosts() {
+            axios.get('/api/posts')
+            .then(res => {
+                if (res.data.status == false || res.data == "" || res.data == null || !res.data) {
+                    setTimeout(() => {
+                        this.loading = false;
+                    },  50)
+                    this.posts = [];
+                    this.not_found = true;
+                } else {
+                    this.posts = res.data;
+                    this.not_found = false;
+                    setTimeout(() => {
+                        this.loading = false;
+                    },  50)
+                }
+            })
+        },
         addPerson: function () {
             axios.post('/api/persons/add', {
                 Person_Name: this.form.Person_Name,
                 Person_Secname: this.form.Person_Secname,
                 Person_Surname: this.form.Person_Surname,
                 Person_Email: this.form.Person_Email,
-                Person_TableId: this.form.Person_TableId
+                Person_TableId: this.form.Person_TableId,
+                Person_PostName: this.form.Person_PostName
                 })
             .then(res => {
                 if (res.data.status == true) {
