@@ -14,6 +14,7 @@
     <div class="uk-card-body">
         <a v-bind:href="this.EmailLink"><p class="uk-text-center@s">{{Person_Email}}</p></a>
         <p class="uk-text-center@s">Табельный: {{Person_TableId}}</p>
+        <p class="personPostName uk-text-center@s" v-bind:uk-tooltip='Post_Name' >{{Post_Name}}</p>
     </div>
 
     <div class="uk-card-footer uk-text-center@s" >
@@ -45,6 +46,14 @@ export default {
                 default: 0
             },
             Person_TableId:{
+                type: String,
+                default: "NULL"
+            },
+            Person_PostId:{
+                type: Number,
+                default: null
+            },
+            Post_Name:{
                 type: String,
                 default: "NULL"
             }
@@ -83,8 +92,8 @@ export default {
     padding-left:0%; 
     min-width: 300px;
     max-width: 300px;
-    min-height: 120px;
-    max-height: 120px;
+    min-height: 150px;
+    max-height: 150px;
     position:relative;
 }
 
@@ -142,5 +151,11 @@ export default {
     max-height: 20px;
     min-width: 20px;
     max-width: 20px;
+}
+
+.personPostName{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\persons;
+use App\Models\posts;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PersonsController extends Controller
 {
     public function getAllPersons() {
-        return persons::all();
+        return persons::join('posts', 'posts.Post_id', '=', 'persons.Person_PostId')
+        ->select('persons.*', 'posts.Post_Name')
+        ->get();
     }
 
     public function getPersonById($id) {
-        $person = persons::where('Person_id', $id)
+        $person = persons::join('posts', 'posts.Post_id', '=', 'persons.Person_PostId')
+            ->select('persons.*', 'posts.Post_Name')
+            ->where('Person_id', $id)
             ->first();
         
         if ($person === null || !$person || $person === "") {
@@ -32,6 +37,7 @@ class PersonsController extends Controller
         $Person_Surname = $request->input('Person_Surname');
         $Person_Email = $request->input('Person_Email');
         $Person_TableId = $request->input('Person_TableId');
+        $Person_PostName = $request->input('Person_PostName');
 
         $emailIsExist = persons::where('Person_Email', $Person_Email)
             ->count();
@@ -50,13 +56,15 @@ class PersonsController extends Controller
                         "message" => 'Пользователь с таким табельным номером существует'
                     ];
                 } else {
+                    $postId = posts::where('Post_Name', 'like', $Person_PostName)->first()->Post_id;
                     persons::insert([
                         'Person_Name' => $Person_Name,
                         'Person_Secname' => $Person_Secname,
                         'Person_Surname' => $Person_Surname,
                         'Person_Fullname' => $Person_Surname . " " . $Person_Name . " " . $Person_Secname,
                         'Person_Email' => $Person_Email,
-                        'Person_TableId' => $Person_TableId
+                        'Person_TableId' => $Person_TableId,
+                        'Person_PostId' => $postId
                     ]);
                     return [
                         "status" => true,

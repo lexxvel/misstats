@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\v1\PersonsController;
 use App\Http\Controllers\Api\v1\SprintsController;
 use App\Http\Controllers\Api\v1\SprintscauseslinkController;
 use App\Http\Controllers\Api\v1\JiraController;
+use App\Http\Controllers\Api\v1\PostsController;
 use App\Http\Kernel;
 use App\Http\Middleware\TokenValidation;
 
@@ -50,3 +51,6 @@ Route::post('sprints/changeActual', [SprintsController::class, 'changeActualSpri
 Route::post('sprintCausesLink/bySprint', [SprintscauseslinkController::class, 'getTopFiveCausesBySprint']);
 
 Route::post('jiraIssueInfo', [JiraController::class, 'getIssueInfo']);
+
+Route::get('posts', [PostsController::class, 'getAllPosts']);
+Route::post('postById', [PostsController::class, 'getPostById']);
