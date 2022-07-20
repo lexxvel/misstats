@@ -4,30 +4,29 @@
             <v-header></v-header>
         </div>
         <div class="contain">
-
-            <h3>Добро пожаловать на страницу авторизации!</h3>
-            <p>Введите логин и пароль:</p>
-            <hr class="uk-divider-icon">
-            <form class="login" @submit.prevent="login" method="POST">
-                
-                <fieldset class="uk-fieldset">
+            <div class="loginForm">
+                <h3>Добро пожаловать на страницу авторизации!</h3>
+                <p>Введите логин и пароль:</p>
+                <hr class="uk-divider-icon">
+                <form class="login" @submit.prevent="login" method="POST">
                     
-                    <div class="uk-margin">
-                        <input required class="uk-input" v-model="form.login" type="text" placeholder="Введите логин...">
-                    </div>
+                    <fieldset class="uk-fieldset">
+                        
+                        <div class="uk-margin">
+                            <input required class="uk-input" test-id="UserLogin" v-model="form.login" type="text" placeholder="Введите логин...">
+                        </div>
 
-                    <div class="uk-margin">
-                        <input required class="uk-input" v-model="form.password" type="password" placeholder="Введите пароль...">
-                    </div>
+                        <div class="uk-margin">
+                            <input required class="uk-input" test-id="UserPassword" v-model="form.password" type="password" placeholder="Введите пароль...">
+                        </div>
 
-                    <button class="uk-button uk-button-primary" type="submit">Войти</button>
+                        <button class="uk-button uk-button-primary" test-id="Login" type="submit">Войти</button>
 
 
-                    
-                </fieldset>
-            </form>
-
-            
+                        
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </template>

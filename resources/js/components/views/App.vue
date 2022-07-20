@@ -4,7 +4,9 @@
         <v-header></v-header>
     </div>
     <div class="contain" uk-panel-scrollable>
-        <task-list></task-list>
+        <div class="TasksPage">
+            <task-list></task-list>
+        </div>
     </div>
     <div class="footer">
         <footer-vue></footer-vue>

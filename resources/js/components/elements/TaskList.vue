@@ -39,13 +39,13 @@
                 <form class="add-task" @submit.prevent="addTask" method="POST">
                     <fieldset class="uk-fieldset">
                         <div class="uk-margin">
-                            <input required class="uk-input" v-model="form.Task_Number" type="text" placeholder="Номер задачи, например 101101">
+                            <input required class="uk-input" id="TaskNumberModal" type="text" placeholder="Номер задачи, например 101101">
                         </div>
                         
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-select">Спринт</label>
                             <div class="uk-form-controls">
-                                <select required v-model="form.Task_SprintName" class="uk-select" id="form-horizontal-select">
+                                <select required v-model="form.Task_SprintName" test-id="TaskSprintModal" class="uk-select" id="form-horizontal-select">
                                     <options v-for="sprint in Sprints"
                                     :key="sprint.Sprint_id"
                                     :Option="sprint.Sprint_Name"
@@ -55,17 +55,17 @@
                         </div>
 
                         <div class="uk-margin">
-                            <input required class="uk-input" v-model="form.Task_Plantime" type="text" placeholder="Оценка трудозатрат">
+                            <input required class="uk-input" test-id="TaskPlanTimeModal" v-model="form.Task_Plantime" type="text" placeholder="Оценка трудозатрат">
                         </div>
 
                         <div class="uk-margin">
-                            <input class="uk-input" v-model="form.Task_Facttime" type="text" placeholder="Фактические трудозатраты">
+                            <input class="uk-input" test-id="TaskFactTimeModal" v-model="form.Task_Facttime" type="text" placeholder="Фактические трудозатраты">
                         </div>
 
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-select">Причина задержки</label>
                             <div class="uk-form-controls">
-                                <select v-model="form.Task_Failcause" class="uk-select" id="form-horizontal-select">
+                                <select v-model="form.Task_Failcause" class="uk-select" test-id="TaskFailcauseModal" id="form-horizontal-select">
                                     <options v-for="option in CauseOptions"
                                     :key="option.Cause_id"
                                     :Option="option.Cause_Name"
