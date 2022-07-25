@@ -50,10 +50,11 @@
                             <div class="uk-margin">
                                 <label class="uk-form-label" for="form-horizontal-select">Должность</label>
                                 <div class="uk-form-controls">
-                                    <select required v-model="form.Person_PostName" class="uk-select" id="form-horizontal-select">
+                                    <select required v-model="form.Person_PostId" class="uk-select" id="form-horizontal-select">
                                         <options v-for="post in posts"
                                         :key="post.Post_id"
                                         :Option="post.Post_Name"
+                                        :id="post.Post_id"
                                         />
                                     </select>
                                 </div>
@@ -98,7 +99,7 @@ export default {
             Person_Secname : "",
             Person_Email : "",
             Person_TableId : "",
-            Person_PostName: ""
+            Person_PostId: ""
         },
         not_found: false,
         isLoggedIn: false
@@ -154,7 +155,7 @@ export default {
                 Person_Surname: this.form.Person_Surname,
                 Person_Email: this.form.Person_Email,
                 Person_TableId: this.form.Person_TableId,
-                Person_PostName: this.form.Person_PostName
+                Person_PostId: this.form.Person_PostId
                 })
             .then(res => {
                 if (res.data.status == true) {

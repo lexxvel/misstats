@@ -37,7 +37,7 @@ class PersonsController extends Controller
         $Person_Surname = $request->input('Person_Surname');
         $Person_Email = $request->input('Person_Email');
         $Person_TableId = $request->input('Person_TableId');
-        $Person_PostName = $request->input('Person_PostName');
+        $Person_PostId = $request->input('Person_PostId');
 
         $emailIsExist = persons::where('Person_Email', $Person_Email)
             ->count();
@@ -56,7 +56,6 @@ class PersonsController extends Controller
                         "message" => 'Пользователь с таким табельным номером существует'
                     ];
                 } else {
-                    $postId = posts::where('Post_Name', 'like', $Person_PostName)->first()->Post_id;
                     persons::insert([
                         'Person_Name' => $Person_Name,
                         'Person_Secname' => $Person_Secname,
@@ -64,7 +63,7 @@ class PersonsController extends Controller
                         'Person_Fullname' => $Person_Surname . " " . $Person_Name . " " . $Person_Secname,
                         'Person_Email' => $Person_Email,
                         'Person_TableId' => $Person_TableId,
-                        'Person_PostId' => $postId
+                        'Person_PostId' => $Person_PostId
                     ]);
                     return [
                         "status" => true,

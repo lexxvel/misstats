@@ -21593,6 +21593,10 @@ __webpack_require__.r(__webpack_exports__);
     Option: {
       type: String,
       "default": ""
+    },
+    id: {
+      type: Number,
+      "default": null
     }
   }
 });
@@ -22245,6 +22249,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -22268,7 +22275,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Task_Facttime: "",
         Task_Failcause: "",
         Task_Failperson: "",
-        Task_SprintName: ""
+        Task_SprintId: ""
       },
       CauseOptions: [],
       Persons: [],
@@ -22527,7 +22534,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.form.Task_Facttime = "";
       this.form.Task_Failcause = "";
       this.form.Task_Failperson = "";
-      this.form.Task_SprintName = "";
+      this.form.Task_SprintId = "";
     },
     addTask: function addTask() {
       axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/tasks/add', {
@@ -22536,7 +22543,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Task_Facttime: this.form.Task_Facttime,
         Task_Failcause: this.form.Task_Failcause,
         Task_Failperson: this.form.Task_Failperson,
-        Task_SprintName: this.form.Task_SprintName
+        Task_SprintId: this.form.Task_SprintId
       }).then(function (res) {
         if (res.data.status == true) {
           UIkit.notification({
@@ -22713,6 +22720,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 
@@ -22738,7 +22746,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       arrCausesLabelsTopFive: [],
       arrCausesCountTopFive: [],
       form: {
-        Sprint_Name: ""
+        Sprint_id: ""
       },
       arrCausesBySprints: [],
       arrCausesBySprintsLabels: [],
@@ -22860,7 +22868,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.arrCausesBySprintsLabels = [];
       this.arrCausesBySprintsCounts = [];
       axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/sprintCausesLink/bySprint', {
-        Sprint_Name: this.form.Sprint_Name
+        Sprint_id: this.form.Sprint_id
       }).then(function (res) {
         if (res.data.status == false) {
           _this4.dataBySprintLoaded = false;
@@ -23433,6 +23441,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -23458,7 +23467,7 @@ __webpack_require__.r(__webpack_exports__);
         Person_Secname: "",
         Person_Email: "",
         Person_TableId: "",
-        Person_PostName: ""
+        Person_PostId: ""
       },
       not_found: false,
       isLoggedIn: false
@@ -23518,7 +23527,7 @@ __webpack_require__.r(__webpack_exports__);
         Person_Surname: this.form.Person_Surname,
         Person_Email: this.form.Person_Email,
         Person_TableId: this.form.Person_TableId,
-        Person_PostName: this.form.Person_PostName
+        Person_PostId: this.form.Person_PostId
       }).then(function (res) {
         if (res.data.status == true) {
           UIkit.notification({
@@ -23907,6 +23916,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elements_Options_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elements/Options.vue */ "./resources/js/components/elements/Options.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+//
+//
 //
 //
 //
@@ -43001,7 +43012,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.footerContain {\r\n  left: 0;\r\n  bottom: 0;\r\n  width: 100%;\r\n  color: rgb(0, 0, 0);\r\n  text-align: center;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.footerContain {\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  color: rgb(0, 0, 0);\n  text-align: center;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43049,7 +43060,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card-person{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 150px;\r\n    max-height: 150px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 12pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\n.personPostName{\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\n    padding: 10px 20px 15px 20px;\n    min-height: 40px;\n    max-height: 40px;\n}\n.uk-card-person{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 300px;\n    max-width: 300px;\n    min-height: 150px;\n    max-height: 150px;\n    position:relative;\n}\n.uk-card:hover{\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\n    max-width: 100%;\n    margin-left:0%;\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\n    margin-top:0%;\n}\n.uk-text-emphasis{\n    font-size: 16px;\n}\n.uk-card-body{\n    padding: 0 10px;\n    min-height: 120px;\n    max-height: 120px;\n}\n.uk-card-footer {\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 40px;\n    max-height: 40px;\n    padding: 10px 20px 10px 20px;\n    position:absolute;\n\tbottom:0;\n}\n.CardItemName {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 12pt;\n}\n.btnEditItem {\n    position: absolute;\n    z-index:  100;\n    margin: 0 0 0 0;\n    height: auto;\n}\n.btnEditItemIcon{\n    min-height: 20px; \n    max-height: 20px;\n    min-width: 20px;\n    max-width: 20px;\n}\n.personPostName{\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43097,7 +43108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 10pt;\n}\n.isActualSprint {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.isActualImg{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\n    padding: 10px 20px 15px 20px;\n    min-height: 40px;\n    max-height: 40px;\n}\n.uk-card{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 300px;\n    max-width: 300px;\n    min-height: 80px;\n    max-height: 80px;\n    position:relative;\n}\n.uk-card:hover{\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\n    max-width: 100%;\n    margin-left:0%;\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\n    margin-top:0%;\n}\n.uk-text-emphasis{\n    font-size: 16px;\n}\n.uk-card-body{\n    padding: 0 10px;\n    min-height: 120px;\n    max-height: 120px;\n}\n.uk-card-footer {\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 40px;\n    max-height: 40px;\n    padding: 10px 20px 10px 20px;\n    position:absolute;\n\tbottom:0;\n}\n.CardItemName {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 10pt;\n}\n.isActualSprint {\n    position: absolute;\n    z-index:  100;\n    margin: 0 0 0 0;\n    height: auto;\n}\n.isActualImg{\n    min-height: 20px; \n    max-height: 20px;\n    min-width: 20px;\n    max-width: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43121,7 +43132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintStatsCardName{\r\n    font-size: 12pt;\n}\n.uk-card-sprint{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 465px;\r\n    max-width: 465px;\r\n    min-height: 150px;\r\n    max-height: 150px;\r\n    position:relative;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintStatsCardName{\n    font-size: 12pt;\n}\n.uk-card-sprint{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 465px;\n    max-width: 465px;\n    min-height: 150px;\n    max-height: 150px;\n    position:relative;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43169,7 +43180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\n.about {\r\n   display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n.about {\n   display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43193,7 +43204,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43217,7 +43228,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.personsWindow {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.personsWindow {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43241,7 +43252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintsWindow {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintsWindow {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43265,7 +43276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.selectSmall {\r\n    display: inline-block;\r\n    width: 500px;\r\n    margin: 0;\r\n    padding: 0px 0px 0px 0px;\n}\n.labelMax {\r\n    margin: 0 1000px 0 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.selectSmall {\n    display: inline-block;\n    width: 500px;\n    margin: 0;\n    padding: 0px 0px 0px 0px;\n}\n.labelMax {\n    margin: 0 1000px 0 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64667,7 +64678,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("option", [_vm._v(_vm._s(_vm.Option))])
+  return _c("option", { domProps: { value: this.id } }, [
+    _vm._v(_vm._s(_vm.Option)),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -65270,7 +65283,38 @@ var render = function () {
                 },
                 [
                   _c("fieldset", { staticClass: "uk-fieldset" }, [
-                    _vm._m(1),
+                    _c("div", { staticClass: "uk-margin" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.Task_Number,
+                            expression: "form.Task_Number",
+                          },
+                        ],
+                        staticClass: "uk-input",
+                        attrs: {
+                          required: "",
+                          id: "TaskNumberModal",
+                          type: "text",
+                          placeholder: "Номер задачи, например 101101",
+                        },
+                        domProps: { value: _vm.form.Task_Number },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "Task_Number",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "uk-margin" }, [
                       _c(
@@ -65290,8 +65334,8 @@ var render = function () {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.Task_SprintName,
-                                expression: "form.Task_SprintName",
+                                value: _vm.form.Task_SprintId,
+                                expression: "form.Task_SprintId",
                               },
                             ],
                             staticClass: "uk-select",
@@ -65312,7 +65356,7 @@ var render = function () {
                                   })
                                 _vm.$set(
                                   _vm.form,
-                                  "Task_SprintName",
+                                  "Task_SprintId",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -65323,7 +65367,10 @@ var render = function () {
                           _vm._l(_vm.Sprints, function (sprint) {
                             return _c("options", {
                               key: sprint.Sprint_id,
-                              attrs: { Option: sprint.Sprint_Name },
+                              attrs: {
+                                Option: sprint.Sprint_Name,
+                                id: sprint.Sprint_id,
+                              },
                             })
                           }),
                           1
@@ -65446,7 +65493,10 @@ var render = function () {
                           _vm._l(_vm.CauseOptions, function (option) {
                             return _c("options", {
                               key: option.Cause_id,
-                              attrs: { Option: option.Cause_Name },
+                              attrs: {
+                                Option: option.Cause_Name,
+                                id: option.Cause_id,
+                              },
                             })
                           }),
                           1
@@ -65501,7 +65551,10 @@ var render = function () {
                           _vm._l(_vm.Persons, function (person) {
                             return _c("options", {
                               key: person.Person_id,
-                              attrs: { Option: person.Person_Fullname },
+                              attrs: {
+                                Option: person.Person_Fullname,
+                                id: person.Person_id,
+                              },
                             })
                           }),
                           1
@@ -65558,22 +65611,6 @@ var staticRenderFns = [
       _c("p", { staticClass: "uk-text-uppercase uk-text-meta" }, [
         _vm._v("Категория:  "),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "uk-margin" }, [
-      _c("input", {
-        staticClass: "uk-input",
-        attrs: {
-          required: "",
-          id: "TaskNumberModal",
-          type: "text",
-          placeholder: "Номер задачи, например 101101",
-        },
-      }),
     ])
   },
 ]
@@ -65729,8 +65766,8 @@ var render = function () {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.Sprint_Name,
-                                expression: "form.Sprint_Name",
+                                value: _vm.form.Sprint_id,
+                                expression: "form.Sprint_id",
                               },
                             ],
                             staticClass: "uk-select",
@@ -65747,7 +65784,7 @@ var render = function () {
                                   })
                                 _vm.$set(
                                   _vm.form,
-                                  "Sprint_Name",
+                                  "Sprint_id",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -65758,7 +65795,10 @@ var render = function () {
                           _vm._l(_vm.sprints, function (sprint) {
                             return _c("options", {
                               key: sprint.Sprint_id,
-                              attrs: { Option: sprint.Sprint_Name },
+                              attrs: {
+                                Option: sprint.Sprint_Name,
+                                id: sprint.Sprint_id,
+                              },
                             })
                           }),
                           1
@@ -66603,8 +66643,8 @@ var render = function () {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.form.Person_PostName,
-                                  expression: "form.Person_PostName",
+                                  value: _vm.form.Person_PostId,
+                                  expression: "form.Person_PostId",
                                 },
                               ],
                               staticClass: "uk-select",
@@ -66625,7 +66665,7 @@ var render = function () {
                                     })
                                   _vm.$set(
                                     _vm.form,
-                                    "Person_PostName",
+                                    "Person_PostId",
                                     $event.target.multiple
                                       ? $$selectedVal
                                       : $$selectedVal[0]
@@ -66636,7 +66676,10 @@ var render = function () {
                             _vm._l(_vm.posts, function (post) {
                               return _c("options", {
                                 key: post.Post_id,
-                                attrs: { Option: post.Post_Name },
+                                attrs: {
+                                  Option: post.Post_Name,
+                                  id: post.Post_id,
+                                },
                               })
                             }),
                             1
@@ -67363,7 +67406,10 @@ var render = function () {
                                   _vm._l(_vm.CauseOptions, function (option) {
                                     return _c("options", {
                                       key: option.Cause_id,
-                                      attrs: { Option: option.Cause_Name },
+                                      attrs: {
+                                        Option: option.Cause_Name,
+                                        id: option.Cause_id,
+                                      },
                                     })
                                   }),
                                   1
@@ -67460,7 +67506,10 @@ var render = function () {
                                   _vm._l(_vm.Persons, function (person) {
                                     return _c("options", {
                                       key: person.Person_id,
-                                      attrs: { Option: person.Person_Fullname },
+                                      attrs: {
+                                        Option: person.Person_Fullname,
+                                        id: person.Person_id,
+                                      },
                                     })
                                   }),
                                   1

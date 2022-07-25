@@ -32,6 +32,7 @@ Route::post('tasks/byCat', [TasksController::class, 'getTasksByCategory']);
 Route::get('tasks/{id}', [TasksController::class, 'getTaskById']);
 Route::post('tasks/add', [TasksController::class, 'addTaskV2']);
 Route::post('tasks/edit', [TasksController::class, 'addTaskInfo']);
+Route::post('tasks/deleteTask', [TasksController::class, 'deleteTaskByNumber']);
 
 Route::get('causes', [CausesController::class, 'getAllCauses']);
 Route::get('causes/{id}', [CausesController::class, 'getCauseById']);
@@ -51,6 +52,7 @@ Route::post('sprints/changeActual', [SprintsController::class, 'changeActualSpri
 Route::post('sprintCausesLink/bySprint', [SprintscauseslinkController::class, 'getTopFiveCausesBySprint']);
 
 Route::post('jiraIssueInfo', [JiraController::class, 'getIssueInfo']);
+//Route::get('tasksFromBoard', [JiraController::class, 'getSprintsFromBoard']);
 
 Route::get('posts', [PostsController::class, 'getAllPosts']);
 Route::post('postById', [PostsController::class, 'getPostById']);

@@ -40,6 +40,7 @@
                                     <options v-for="option in CauseOptions"
                                     :key="option.Cause_id"
                                     :Option="option.Cause_Name"
+                                    :id="option.Cause_id"
                                     />
                                 </select>
                             </div>
@@ -56,6 +57,7 @@
                                     <options v-for="person in Persons"
                                     :key="person.Person_id"
                                     :Option="person.Person_Fullname"
+                                    :id="person.Person_id"
                                     />
                                 </select>
                             </div>

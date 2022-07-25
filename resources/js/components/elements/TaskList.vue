@@ -39,16 +39,17 @@
                 <form class="add-task" @submit.prevent="addTask" method="POST">
                     <fieldset class="uk-fieldset">
                         <div class="uk-margin">
-                            <input required class="uk-input" id="TaskNumberModal" type="text" placeholder="Номер задачи, например 101101">
+                            <input required class="uk-input" id="TaskNumberModal" v-model="form.Task_Number" type="text" placeholder="Номер задачи, например 101101">
                         </div>
                         
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-select">Спринт</label>
                             <div class="uk-form-controls">
-                                <select required v-model="form.Task_SprintName" test-id="TaskSprintModal" class="uk-select" id="form-horizontal-select">
+                                <select required v-model=form.Task_SprintId test-id="TaskSprintModal" class="uk-select" id="form-horizontal-select">
                                     <options v-for="sprint in Sprints"
                                     :key="sprint.Sprint_id"
                                     :Option="sprint.Sprint_Name"
+                                    :id="sprint.Sprint_id"
                                     />
                                 </select>
                             </div>
@@ -69,6 +70,7 @@
                                     <options v-for="option in CauseOptions"
                                     :key="option.Cause_id"
                                     :Option="option.Cause_Name"
+                                    :id="option.Cause_id"
                                     />
                                 </select>
                             </div>
@@ -81,6 +83,7 @@
                                     <options v-for="person in Persons"
                                     :key="person.Person_id"
                                     :Option="person.Person_Fullname"
+                                    :id="person.Person_id"
                                     />
                                 </select>
                             </div>
@@ -125,7 +128,7 @@ export default {
                 Task_Facttime : "",
                 Task_Failcause : "",
                 Task_Failperson : "",
-                Task_SprintName: ""
+                Task_SprintId: ""
             },
             CauseOptions: [], 
             Persons: [],
@@ -314,7 +317,7 @@ export default {
              this.form.Task_Facttime = "";
              this.form.Task_Failcause = "";
              this.form.Task_Failperson = "";
-             this.form.Task_SprintName = "";
+             this.form.Task_SprintId = "";
         },
         addTask: function () {
             axios.post('/api/tasks/add', {
@@ -323,7 +326,7 @@ export default {
                 Task_Facttime: this.form.Task_Facttime,
                 Task_Failcause: this.form.Task_Failcause,
                 Task_Failperson: this.form.Task_Failperson,
-                Task_SprintName: this.form.Task_SprintName
+                Task_SprintId: this.form.Task_SprintId
                 })
             .then(res => {
                 if (res.data.status == true) {
@@ -341,8 +344,6 @@ export default {
             } else {
                 this.loadTasksByCat();
             }
-            
-            
         }
     },
     mounted() {

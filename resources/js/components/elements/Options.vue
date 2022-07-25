@@ -1,5 +1,5 @@
 <template>
-  <option>{{Option}}</option>
+  <option v-bind:value=this.id >{{Option}}</option>
 </template>
 
 <script>
@@ -8,6 +8,10 @@ export default {
         Option: {
             type: String,
             default: ""
+        },
+        id: {
+           type: Number,
+            default: null
         }
     }
 }

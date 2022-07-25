@@ -10,14 +10,13 @@ use Illuminate\Http\Request;
 class SprintscauseslinkController extends Controller
 {
     public function getTopFiveCausesBySprint(Request $request) {
-        $sprint_Name = $request->input('Sprint_Name');
+        $Sprint_id = $request->input('Sprint_id');
         
-        if ($sprint_Name !== null) {
-            $sprint_id = sprints::where('Sprint_Name', 'like', $sprint_Name)->first()->Sprint_id;
+        if ($Sprint_id !== null) {
 
             $result =  sprintscauseslink::join('causes', 'causes.Cause_id', '=', 'sprintscauseslink.Cause_id')
             ->select('sprintscauseslink.Cause_id', 'causes.Cause_Name', 'sprintscauseslink.Cause_Failcount')
-            ->where('sprintscauseslink.Sprint_id', $sprint_id)
+            ->where('sprintscauseslink.Sprint_id', $Sprint_id)
             ->orderBy('sprintscauseslink.Cause_Failcount', 'DESC')
             ->take(5)->get();
             

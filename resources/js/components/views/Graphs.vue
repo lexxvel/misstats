@@ -34,10 +34,11 @@
                     <li>
                         <div class="BySprints">
                             <span class="uk-label labelMax">Выберите спринт</span>
-                            <select v-model="form.Sprint_Name" class="uk-select" id="form-horizontal-select">
+                            <select v-model="form.Sprint_id" class="uk-select" id="form-horizontal-select">
                                 <options v-for="sprint in sprints"
                                 :key="sprint.Sprint_id"
                                 :Option="sprint.Sprint_Name"
+                                :id="sprint.Sprint_id"
                                 />
                             </select>
                             <button class="uk-button uk-button-primary" @click="findStatsBySprint">Найти</button>
@@ -78,7 +79,7 @@ export default {
             arrCausesLabelsTopFive: [],
             arrCausesCountTopFive: [],
             form: {
-                Sprint_Name: ""
+                Sprint_id: ""
             },
             arrCausesBySprints: [],
             arrCausesBySprintsLabels: [],
@@ -160,7 +161,7 @@ export default {
                 this.arrCausesBySprints = [];
                 this.arrCausesBySprintsLabels = [];
                 this.arrCausesBySprintsCounts = [];
-                axios.post('/api/sprintCausesLink/bySprint', {Sprint_Name: this.form.Sprint_Name})
+                axios.post('/api/sprintCausesLink/bySprint', {Sprint_id: this.form.Sprint_id})
                 .then(res => {
                     if (res.data.status == false) {
                         this.dataBySprintLoaded = false;
