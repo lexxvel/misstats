@@ -24450,7 +24450,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use((vue_cookies__WEBPACK_IMPORTED_M
         commit('auth_request');
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/login', form).then(function (resp) {
           if (resp.data.status === true) {
-            var token = resp.data.api_token;
+            var token = resp.data.remember_token;
             var id = resp.data.id;
             var username = resp.data.username;
             var role = resp.data.User_Role_id; //localStorage.setItem('token', token)
@@ -43012,7 +43012,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.footerContain {\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  color: rgb(0, 0, 0);\n  text-align: center;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.footerContain {\r\n  left: 0;\r\n  bottom: 0;\r\n  width: 100%;\r\n  color: rgb(0, 0, 0);\r\n  text-align: center;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43060,7 +43060,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\n    padding: 10px 20px 15px 20px;\n    min-height: 40px;\n    max-height: 40px;\n}\n.uk-card-person{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 300px;\n    max-width: 300px;\n    min-height: 150px;\n    max-height: 150px;\n    position:relative;\n}\n.uk-card:hover{\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\n    max-width: 100%;\n    margin-left:0%;\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\n    margin-top:0%;\n}\n.uk-text-emphasis{\n    font-size: 16px;\n}\n.uk-card-body{\n    padding: 0 10px;\n    min-height: 120px;\n    max-height: 120px;\n}\n.uk-card-footer {\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 40px;\n    max-height: 40px;\n    padding: 10px 20px 10px 20px;\n    position:absolute;\n\tbottom:0;\n}\n.CardItemName {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 12pt;\n}\n.btnEditItem {\n    position: absolute;\n    z-index:  100;\n    margin: 0 0 0 0;\n    height: auto;\n}\n.btnEditItemIcon{\n    min-height: 20px; \n    max-height: 20px;\n    min-width: 20px;\n    max-width: 20px;\n}\n.personPostName{\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card-person{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 150px;\r\n    max-height: 150px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 12pt;\n}\n.btnEditItem {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.btnEditItemIcon{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\n.personPostName{\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43108,7 +43108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\n    padding: 10px 20px 15px 20px;\n    min-height: 40px;\n    max-height: 40px;\n}\n.uk-card{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 300px;\n    max-width: 300px;\n    min-height: 80px;\n    max-height: 80px;\n    position:relative;\n}\n.uk-card:hover{\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\n    max-width: 100%;\n    margin-left:0%;\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\n    margin-top:0%;\n}\n.uk-text-emphasis{\n    font-size: 16px;\n}\n.uk-card-body{\n    padding: 0 10px;\n    min-height: 120px;\n    max-height: 120px;\n}\n.uk-card-footer {\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 40px;\n    max-height: 40px;\n    padding: 10px 20px 10px 20px;\n    position:absolute;\n\tbottom:0;\n}\n.CardItemName {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 10pt;\n}\n.isActualSprint {\n    position: absolute;\n    z-index:  100;\n    margin: 0 0 0 0;\n    height: auto;\n}\n.isActualImg{\n    min-height: 20px; \n    max-height: 20px;\n    min-width: 20px;\n    max-width: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.uk-card-header{\r\n    padding: 10px 20px 15px 20px;\r\n    min-height: 40px;\r\n    max-height: 40px;\n}\n.uk-card{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 300px;\r\n    max-width: 300px;\r\n    min-height: 80px;\r\n    max-height: 80px;\r\n    position:relative;\n}\n.uk-card:hover{\r\n    background-color: rgba(190, 215, 252, 0.266);\n}\n.uk-grid{\r\n    max-width: 100%;\r\n    margin-left:0%;\r\n    margin-top:0%;\n}\n.uk-grid+.uk-grid{\r\n    margin-top:0%;\n}\n.uk-text-emphasis{\r\n    font-size: 16px;\n}\n.uk-card-body{\r\n    padding: 0 10px;\r\n    min-height: 120px;\r\n    max-height: 120px;\n}\n.uk-card-footer {\r\n    min-width: 100%;\r\n    max-width: 100%;\r\n    min-height: 40px;\r\n    max-height: 40px;\r\n    padding: 10px 20px 10px 20px;\r\n    position:absolute;\r\n\tbottom:0;\n}\n.CardItemName {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    font-size: 10pt;\n}\n.isActualSprint {\r\n    position: absolute;\r\n    z-index:  100;\r\n    margin: 0 0 0 0;\r\n    height: auto;\n}\n.isActualImg{\r\n    min-height: 20px; \r\n    max-height: 20px;\r\n    min-width: 20px;\r\n    max-width: 20px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43132,7 +43132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintStatsCardName{\n    font-size: 12pt;\n}\n.uk-card-sprint{\n    margin: 10px 15px 10px 15px;\n    display: block;\n    border:1px solid black;\n    float: left;\n    overflow: hidden;\n    border-radius: 7px;\n    border-color: #00499c2d;\n    background-color: rgba(230, 240, 255, 0.233);\n    padding-left:0%; \n    min-width: 465px;\n    max-width: 465px;\n    min-height: 150px;\n    max-height: 150px;\n    position:relative;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintStatsCardName{\r\n    font-size: 12pt;\n}\n.uk-card-sprint{\r\n    margin: 10px 15px 10px 15px;\r\n    display: block;\r\n    border:1px solid black;\r\n    float: left;\r\n    overflow: hidden;\r\n    border-radius: 7px;\r\n    border-color: #00499c2d;\r\n    background-color: rgba(230, 240, 255, 0.233);\r\n    padding-left:0%; \r\n    min-width: 465px;\r\n    max-width: 465px;\r\n    min-height: 150px;\r\n    max-height: 150px;\r\n    position:relative;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43180,7 +43180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n.about {\n   display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\n.about {\r\n   display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43204,7 +43204,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.contain {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43228,7 +43228,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.personsWindow {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.personsWindow {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43252,7 +43252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintsWindow {\n    display: block;\n    min-height: 100%;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sprintsWindow {\r\n    display: block;\r\n    min-height: 100%;\r\n    height: auto;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43276,7 +43276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.selectSmall {\n    display: inline-block;\n    width: 500px;\n    margin: 0;\n    padding: 0px 0px 0px 0px;\n}\n.labelMax {\n    margin: 0 1000px 0 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.selectSmall {\r\n    display: inline-block;\r\n    width: 500px;\r\n    margin: 0;\r\n    padding: 0px 0px 0px 0px;\n}\n.labelMax {\r\n    margin: 0 1000px 0 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

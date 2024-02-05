@@ -26,12 +26,12 @@ class LoginController extends Controller
                 "message" => "User not found"
             ];
         } elseif ($isexist == 1) {
-            $user->api_token = Str::random(60);
+            $user->remember_token = Str::random(60);
             $user->save();
             return [
                 "status" => true,
                 "message" => "Auth success",
-                "api_token" => $user->api_token,
+                "remember_token" => $user->remember_token,
                 "username" => $user->User_Name,
                 "id" => $user->id,
                 "User_Role_id" => $user->User_Role_id

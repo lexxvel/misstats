@@ -18,11 +18,11 @@ class TokenValidation
     public function handle(Request $request, Closure $next)
     {
         $dbtoken = users::where('id', $request->input('User_id'))
-        ->select('api_token')
+        ->select('remember_token')
         ->first();
-        if ($request->input('token') !== $dbtoken->api_token) {
+        if ($request->input('token') !== $dbtoken->remember_token) {
             return abort(403);
-        } else { 
+        } else {
             $response = $next($request);
             return $response;
         }

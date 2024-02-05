@@ -53,7 +53,7 @@ export default new Vuex.Store({
         axios.post('/api/login', form)
         .then(resp => {
           if(resp.data.status === true){
-            const token = resp.data.api_token
+            const token = resp.data.remember_token
             const id = resp.data.id
             const username = resp.data.username
             const role = resp.data.User_Role_id
@@ -64,7 +64,7 @@ export default new Vuex.Store({
             localStorage.setItem('role', role)
             $cookies.set('token', token) //УСТАНОВКА ТОКЕНА В КУКИ ВМЕСТО ЛОКАЛСТОР
             axios.defaults.headers.common['Authorization'] = token
-            commit('login', { token, username, id, role })                                                                                                                                                                                                                                                                                                                                
+            commit('login', { token, username, id, role })
             resolve(resp)
           }else{
             commit('auth_error')
