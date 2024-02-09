@@ -11,7 +11,7 @@ export default {
         },
         id: {
            type: Number,
-            default: null
+            default: undefined
         }
     }
 }

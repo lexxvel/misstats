@@ -17,7 +17,7 @@
             <spin v-if="loading"></spin>
             <div class="uk-grid" v-else-if="!loading && !not_found">
                     <sprint-card v-for="sprint in sprints"
-                    :key="sprint.Sprint_id" 
+                    :key="sprint.Sprint_id"
                     :Sprint_Name="sprint.Sprint_Name"
                     :Sprint_UserId="sprint.Sprint_UserId"
                     :User_Name="sprint.User_Name"
@@ -39,10 +39,11 @@
                                 <label class="uk-form-label" for="form-horizontal-select">Актуальный спринт?</label>
                                 <select required v-model="form.Sprint_isActual" class="uk-select" id="form-horizontal-select" aria-label="Актуальный спринт?">
                                     <options v-for="YesNoValue in YesNoValues"
+                                        :id="YesNoValue.id"
                                         :key="YesNoValue.id"
                                         :Option="YesNoValue.label"
                                     />
-                                </select>    
+                                </select>
                             </div>
                             <button class="uk-button uk-button-default uk-modal-close" type="button" @click="clearAddSprintForm()">Отмена</button>
                             <button class="uk-button uk-button-primary" type="submit">Сохранить</button>
@@ -77,15 +78,15 @@ export default {
         sprints: [],
         form: {
             Sprint_Name : "",
-            Sprint_isActual: ""
+            Sprint_isActual: null
         },
         not_found: false,
         isLoggedIn: false,
         sprintEditing: false,
         newActualSprint: "",
         YesNoValues: [
-            {id: 0, label: "Нет"},
-            {id: 1, label: "Да"}
+            {'id': 0, 'label': "Нет"},
+            {'id': 1, 'label': "Да"}
         ]
     }),
     mounted() {
@@ -93,7 +94,7 @@ export default {
             this.$router.push('/');
         } else {
             this.loadSprints();
-        } 
+        }
     },
     computed: {
         User_id() { return this.$store.getters.GetID },
