@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\v1\SprintsController;
 use App\Http\Controllers\Api\v1\SprintscauseslinkController;
 use App\Http\Controllers\Api\v1\JiraController;
 use App\Http\Controllers\Api\v1\PostsController;
+use App\Http\Controllers\Api\v1\UsersController;
 use App\Http\Kernel;
 use App\Http\Middleware\TokenValidation;
 
@@ -25,6 +26,8 @@ use App\Http\Middleware\TokenValidation;
 */
 
 Route::get('users', [LoginController::class, 'getAllUsers']);
+Route::post('users/createUser', [UsersController::class, 'createUser']);
+
 Route::post('login', [LoginController::class, 'loginAuth']);
 
 Route::post('tasks', [TasksController::class, 'getAllTasks']);
