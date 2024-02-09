@@ -47,4 +47,43 @@ class users extends Model
             ];
         }
     }
+
+    public function delUser($id)
+    {
+        $result = DB::table('users')->where('id', '=', $id)->delete();
+        if ($result == 1) {
+            return [
+                'success' => true,
+                'msg' => 'Пользователь удален'
+            ];
+        } else {
+            return [
+                'success' => true,
+                'error_msg' => 'Пользователь не удален. Произошла ошибка!'
+            ];
+        }
+    }
+
+    public function updateUser($id, $User_Login, $User_Name, $User_Password, $User_Role_id)
+    {
+        $result = DB::table('users')->where('id', '=', $id)->update([
+            "User_Login" => $User_Login,
+            "User_Name" => $User_Name,
+            "User_Password" => $User_Password,
+            "User_Role_id" => $User_Role_id,
+            "updated_at" => Carbon::now()
+        ]);
+
+        if ($result == 1) {
+            return [
+                'success' => true,
+                'msg' => 'Пользователь обновлен'
+            ];
+        } else {
+            return [
+                'success' => true,
+                'error_msg' => 'Пользователь не обновлен. Произошла ошибка!'
+            ];
+        }
+    }
 }

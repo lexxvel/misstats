@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Crypt;
 
 class UsersController extends Controller
 {
-    function createUser(Request $request) {
+    function createUser(Request $request)
+    {
         $User_Login = $request->input("User_Login");
         $User_Name = $request->input("User_Name");
         Crypt::encryptString($request->input("User_Password"));
@@ -39,5 +40,38 @@ class UsersController extends Controller
                 "msg" => "Пользователь не создан. Произошла ошибка"
             ];
         }
+    }
+
+    function delUser(Request $request)
+    {
+        $id = $request->input("id");
+        if (!$id) {
+            return [
+                "status" => "false",
+                "msg" => "Не передан обязательный параметр"
+            ];
+        }
+
+        return(new users)->delUser($id);
+    }
+
+    function updateUser(Request $request)
+    {
+        $id = $request->input("id");
+        $User_Login = $request->input("User_Login");
+        $User_Name = $request->input("User_Name");
+        Crypt::encryptString($request->input("User_Password"));
+        $User_Password = $request->input("User_Password");
+        $User_Role_id = $request->input("User_Role_id");
+
+        if (!$id || !$User_Login || !$User_Name || !$User_Password || !$User_Role_id)
+        {
+            return [
+                "status" => "false",
+                "msg" => "Не переданы обязательные параметры"
+            ];
+        }
+
+        return (new users)->updateUser($id, $User_Login, $User_Name, $User_Password, $User_Role_id);
     }
 }

@@ -27,6 +27,8 @@ use App\Http\Middleware\TokenValidation;
 
 Route::get('users', [LoginController::class, 'getAllUsers']);
 Route::post('users/createUser', [UsersController::class, 'createUser']);
+Route::post('users/delUser', [UsersController::class, 'delUser']);
+Route::post('users/updateUser', [UsersController::class, 'updateUser']);
 
 Route::post('login', [LoginController::class, 'loginAuth']);
 
